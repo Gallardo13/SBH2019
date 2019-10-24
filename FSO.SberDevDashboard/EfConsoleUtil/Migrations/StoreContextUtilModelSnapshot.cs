@@ -247,6 +247,9 @@ namespace EfConsoleUtil.Migrations
                     b.Property<int>("DimensionId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("DimensionValue")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("IndicatorId")
                         .HasColumnType("INTEGER");
 

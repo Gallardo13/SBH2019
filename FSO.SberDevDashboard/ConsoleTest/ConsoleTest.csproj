@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FSO.SDD.DataBaseEfStore\FSO.SDD.DataBaseEfStore.csproj" />
+    <ProjectReference Include="..\FSO.SDD.DbModel\FSO.SDD.DbModel.csproj" />
+  </ItemGroup>
+
 </Project>

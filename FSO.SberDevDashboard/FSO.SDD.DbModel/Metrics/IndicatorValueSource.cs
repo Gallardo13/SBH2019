@@ -3,7 +3,7 @@
 namespace FSO.SDD.DbModel
 {
     /// <summary>
-    /// Список ключей сущностей для показетеля индикатора
+    /// Список ключей сущностей для значения индикатора
     /// </summary>
     public class IndicatorValueSource
     {

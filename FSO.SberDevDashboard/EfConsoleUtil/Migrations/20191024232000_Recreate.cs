@@ -305,7 +305,8 @@ namespace EfConsoleUtil.Migrations
                     IndicatorId = table.Column<int>(nullable: false),
                     DimensionId = table.Column<int>(nullable: false),
                     IndicatorSeriesId = table.Column<int>(nullable: false),
-                    Value = table.Column<decimal>(nullable: false)
+                    Value = table.Column<decimal>(nullable: false),
+                    DimensionValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

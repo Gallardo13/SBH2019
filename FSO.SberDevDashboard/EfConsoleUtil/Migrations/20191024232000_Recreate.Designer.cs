@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfConsoleUtil.Migrations
 {
     [DbContext(typeof(StoreContextUtil))]
-    [Migration("20191024220014_Recreate")]
+    [Migration("20191024232000_Recreate")]
     partial class Recreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -248,6 +248,9 @@ namespace EfConsoleUtil.Migrations
 
                     b.Property<int>("DimensionId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("DimensionValue")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("IndicatorId")
                         .HasColumnType("INTEGER");
