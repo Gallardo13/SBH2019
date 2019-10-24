@@ -31,6 +31,9 @@ namespace ImportData
                 ImportRelease(db);
                 ImportJiraTaskState(db);
                 ImportJiraTask(db);
+                ImportJiraEpicTask(db);
+                ImportJiraSprintTask(db);
+                ImportJiraReleaseTask(db);
                 db.SaveChanges();
             }
         }
@@ -163,6 +166,69 @@ namespace ImportData
                 foreach (var jiraTask in jiraTasks)
                     lock(obj)
                         db.JiraTasks.Add(jiraTask);
+            });
+        }
+
+        private static void ImportJiraEpicTask(StoreContext db)
+        {
+            var fileName = new[] { @"../../../../../Задачи1.csv", @"../../../../../Задачи2.csv" };
+            var obj = new object();
+
+            Parallel.ForEach(fileName, (fn) =>
+            {
+                var els = ReadFile(fn)
+                    .OrderBy(e => e[18])
+                    .Select(e => new JiraEpicTask
+                    {
+                        EpicId = e[18].ParseToInt(),
+                        TaskId = e[0].ParseToInt()
+                    });
+
+                foreach (var el in els)
+                    lock (obj)
+                        db.JiraEpicTasks.Add(el);
+            });
+        }
+
+        private static void ImportJiraSprintTask(StoreContext db)
+        {
+            var fileName = new[] { @"../../../../../Задачи1.csv", @"../../../../../Задачи2.csv" };
+            var obj = new object();
+
+            Parallel.ForEach(fileName, (fn) =>
+            {
+                var els = ReadFile(fn)
+                    .OrderBy(e => e[15])
+                    .Select(e => new JiraSprintTask
+                    {
+                        SprintId = e[15].ParseToInt(),
+                        TaskId = e[0].ParseToInt()
+                    });
+
+                foreach (var el in els)
+                    lock (obj)
+                        db.JiraSprintTasks.Add(el);
+            });
+        }
+
+        private static void ImportJiraReleaseTask(StoreContext db)
+        {
+            var fileName = new[] { @"../../../../../Задачи1.csv", @"../../../../../Задачи2.csv" };
+            var obj = new object();
+
+            Parallel.ForEach(fileName, (fn) =>
+            {
+                var els = ReadFile(fn)
+                    .OrderBy(e => e[13])
+                    .Select(e => new JiraReleaseTask
+                    {
+                        ReleaseId = e[13].ParseToInt(),
+                        TaskId = e[0].ParseToInt()
+                    });
+
+                foreach (var el in els)
+                    lock (obj)
+                        db.JiraReleaseTasks.Add(el);
             });
         }
 
