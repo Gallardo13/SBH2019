@@ -1,0 +1,10 @@
+﻿Id,Name
+1,New
+2,Planned
+3,InWork
+4,Stabilization
+5,SystemTest
+6,IFT
+7,Acceptance Test
+8,Production
+9,Rejected
