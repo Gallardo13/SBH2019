@@ -2,7 +2,10 @@
 
 namespace FSO.SDD.DbModel
 {
-    public class JiraReleaseState
+    /// <summary>
+    /// состояние пулреквеста
+    /// </summary>
+    public class GitPullRequestState
     {
         /// <summary>
         /// Ид 

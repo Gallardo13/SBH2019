@@ -3,9 +3,9 @@
 namespace FSO.SDD.DbModel
 {
     /// <summary>
-    /// Задача, вклоюченная в релиз
+    /// Задача, ассоциированная с коммитом
     /// </summary>
-    public class JiraReleaseTask
+    public class GitCommitTask
     {
         /// <summary>
         /// Ид 
@@ -13,9 +13,10 @@ namespace FSO.SDD.DbModel
         [Key]
         public int Id { get; set; }
 
-        public int ReleaseId { get; set; }
+        public int CommitId { get; set; }
 
         public int TaskId { get; set; }
+
 
     }
 }

@@ -1,12 +1,67 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FSO.SDD.DataBaseEfStore.Migrations
+namespace EfConsoleUtil.Migrations
 {
-    public partial class JiraItems : Migration
+    public partial class Recreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "GitBranches",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    JiraTaskKey = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GitBranches", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GitCommitTasks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CommitId = table.Column<int>(nullable: false),
+                    TaskId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GitCommitTasks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GitPullRequestApprovers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PullRequestId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GitPullRequestApprovers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GitPullRequestStates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GitPullRequestStates", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "JiraEpics",
                 columns: table => new
@@ -256,6 +311,70 @@ namespace FSO.SDD.DataBaseEfStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GitCommits",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ComminHash = table.Column<string>(nullable: true),
+                    Comment = table.Column<string>(nullable: true),
+                    BranchId = table.Column<int>(nullable: false),
+                    AuthorId = table.Column<int>(nullable: false),
+                    CreatedDateTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GitCommits", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GitCommits_Users_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GitCommits_GitBranches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "GitBranches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GitPullRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AuthorId = table.Column<int>(nullable: false),
+                    BranchId = table.Column<int>(nullable: false),
+                    StateId = table.Column<int>(nullable: false),
+                    CreatedDateTime = table.Column<DateTime>(nullable: false),
+                    MergedDateTime = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GitPullRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GitPullRequests_Users_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GitPullRequests_GitBranches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "GitBranches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GitPullRequests_GitPullRequestStates_StateId",
+                        column: x => x.StateId,
+                        principalTable: "GitPullRequestStates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "JiraTaskHistorys",
                 columns: table => new
                 {
@@ -301,7 +420,7 @@ namespace FSO.SDD.DataBaseEfStore.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Key = table.Column<string>(nullable: true),
                     AuthorId = table.Column<int>(nullable: false),
-                    OwnerId = table.Column<int>(nullable: true),
+                    OwnerId = table.Column<int>(nullable: false),
                     ProjectKey = table.Column<string>(nullable: true),
                     ConfigurationItem = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
@@ -328,7 +447,7 @@ namespace FSO.SDD.DataBaseEfStore.Migrations
                         column: x => x.OwnerId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_JiraTasks_JiraTaskStates_StateId",
                         column: x => x.StateId,
@@ -369,6 +488,31 @@ namespace FSO.SDD.DataBaseEfStore.Migrations
                 name: "IX_DataSources_SourceSystemId",
                 table: "DataSources",
                 column: "SourceSystemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GitCommits_AuthorId",
+                table: "GitCommits",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GitCommits_BranchId",
+                table: "GitCommits",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GitPullRequests_AuthorId",
+                table: "GitPullRequests",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GitPullRequests_BranchId",
+                table: "GitPullRequests",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GitPullRequests_StateId",
+                table: "GitPullRequests",
+                column: "StateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JiraReleaseHistorys_StateId",
@@ -427,6 +571,18 @@ namespace FSO.SDD.DataBaseEfStore.Migrations
                 name: "DataFacts");
 
             migrationBuilder.DropTable(
+                name: "GitCommits");
+
+            migrationBuilder.DropTable(
+                name: "GitCommitTasks");
+
+            migrationBuilder.DropTable(
+                name: "GitPullRequestApprovers");
+
+            migrationBuilder.DropTable(
+                name: "GitPullRequests");
+
+            migrationBuilder.DropTable(
                 name: "JiraEpics");
 
             migrationBuilder.DropTable(
@@ -458,6 +614,12 @@ namespace FSO.SDD.DataBaseEfStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "DataSources");
+
+            migrationBuilder.DropTable(
+                name: "GitBranches");
+
+            migrationBuilder.DropTable(
+                name: "GitPullRequestStates");
 
             migrationBuilder.DropTable(
                 name: "JiraReleaseStates");
