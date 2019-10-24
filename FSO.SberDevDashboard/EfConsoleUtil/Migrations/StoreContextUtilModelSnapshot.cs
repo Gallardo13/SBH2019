@@ -621,9 +621,6 @@ namespace EfConsoleUtil.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("DefectSeverity")
                         .HasColumnType("INTEGER");
 
@@ -633,7 +630,7 @@ namespace EfConsoleUtil.Migrations
                     b.Property<int>("OriginalEstimation")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("OwnerId")
+                    b.Property<int>("OwnerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Remainder")
@@ -642,16 +639,19 @@ namespace EfConsoleUtil.Migrations
                     b.Property<int>("StateId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("TaskId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("UpdatedDateTime")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("OwnerId");
 
                     b.HasIndex("StateId");
+
+                    b.HasIndex("TaskId");
 
                     b.ToTable("JiraTaskHistorys");
                 });
@@ -872,19 +872,21 @@ namespace EfConsoleUtil.Migrations
 
             modelBuilder.Entity("FSO.SDD.DbModel.JiraTaskHistory", b =>
                 {
-                    b.HasOne("FSO.SDD.DbModel.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FSO.SDD.DbModel.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FSO.SDD.DbModel.JiraTaskState", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FSO.SDD.DbModel.JiraTask", "Task")
+                        .WithMany()
+                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

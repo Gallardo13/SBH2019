@@ -11,17 +11,15 @@ namespace FSO.SDD.DbModel
         [Key]
         public int Id { get; set; }
 
-        /// <summary>
-        /// Автор - позволит отслеживать статус созданных мной задач
-        /// </summary>
-        public User Author { get; set; }
+        public JiraTask Task { get; set; }
 
-        public int AuthorId { get; set; }
+        public int TaskId { get; set; }
 
         /// <summary>
         /// На кого задача назначена
         /// </summary>
         public User Owner { get; set; }
+        public int OwnerId { get; set; }
 
         /// <summary>
         /// Критичность дефекта (1-5. 0 - не дефект)

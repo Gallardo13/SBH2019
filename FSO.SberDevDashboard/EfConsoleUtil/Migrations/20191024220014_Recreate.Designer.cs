@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfConsoleUtil.Migrations
 {
     [DbContext(typeof(StoreContextUtil))]
-    [Migration("20191024150712_Recreate")]
+    [Migration("20191024220014_Recreate")]
     partial class Recreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,6 +193,128 @@ namespace EfConsoleUtil.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GitPullRequestStates");
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.Indicator", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Indicators");
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.IndicatorDimension", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IndicatorDimensions");
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.IndicatorSourceAggregate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IndicatorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SourceType")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IndicatorSourceAggregates");
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.IndicatorValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DimensionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IndicatorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IndicatorSeriesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DimensionId");
+
+                    b.HasIndex("IndicatorId");
+
+                    b.HasIndex("IndicatorSeriesId");
+
+                    b.ToTable("IndicatorValues");
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.IndicatorValueSource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IndicatorValueId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IndicatorValueSourceKeyId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IndicatorValueSources");
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.IndicatorValueSourceKey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SourceItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SourceType")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IndicatorValueSourceKeys");
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.IndicatorValuesSeries", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IndicatorValuesSeries");
                 });
 
             modelBuilder.Entity("FSO.SDD.DbModel.JiraEpic", b =>
@@ -501,9 +623,6 @@ namespace EfConsoleUtil.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("DefectSeverity")
                         .HasColumnType("INTEGER");
 
@@ -513,7 +632,7 @@ namespace EfConsoleUtil.Migrations
                     b.Property<int>("OriginalEstimation")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("OwnerId")
+                    b.Property<int>("OwnerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Remainder")
@@ -522,16 +641,19 @@ namespace EfConsoleUtil.Migrations
                     b.Property<int>("StateId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("TaskId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("UpdatedDateTime")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("OwnerId");
 
                     b.HasIndex("StateId");
+
+                    b.HasIndex("TaskId");
 
                     b.ToTable("JiraTaskHistorys");
                 });
@@ -548,6 +670,37 @@ namespace EfConsoleUtil.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JiraTaskStates");
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.Metric", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IndicatorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("MaxValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("MinValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("OptimalValueHigh")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("OptimalValueLow")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IndicatorId");
+
+                    b.ToTable("Metrics");
                 });
 
             modelBuilder.Entity("FSO.SDD.DbModel.SourceSystem", b =>
@@ -641,6 +794,27 @@ namespace EfConsoleUtil.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("FSO.SDD.DbModel.IndicatorValue", b =>
+                {
+                    b.HasOne("FSO.SDD.DbModel.IndicatorDimension", "Dimension")
+                        .WithMany()
+                        .HasForeignKey("DimensionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FSO.SDD.DbModel.Indicator", "Indicator")
+                        .WithMany()
+                        .HasForeignKey("IndicatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FSO.SDD.DbModel.IndicatorValuesSeries", "IndicatorSeries")
+                        .WithMany()
+                        .HasForeignKey("IndicatorSeriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FSO.SDD.DbModel.JiraRelease", b =>
                 {
                     b.HasOne("FSO.SDD.DbModel.JiraReleaseState", "State")
@@ -700,19 +874,30 @@ namespace EfConsoleUtil.Migrations
 
             modelBuilder.Entity("FSO.SDD.DbModel.JiraTaskHistory", b =>
                 {
-                    b.HasOne("FSO.SDD.DbModel.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FSO.SDD.DbModel.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FSO.SDD.DbModel.JiraTaskState", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FSO.SDD.DbModel.JiraTask", "Task")
+                        .WithMany()
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FSO.SDD.DbModel.Metric", b =>
+                {
+                    b.HasOne("FSO.SDD.DbModel.Indicator", "Indicator")
+                        .WithMany()
+                        .HasForeignKey("IndicatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
