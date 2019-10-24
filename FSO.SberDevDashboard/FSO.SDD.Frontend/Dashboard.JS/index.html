@@ -16,24 +16,138 @@
 <link rel="stylesheet" type="text/css" href="css/jquery.gridster.css">
 <link rel="stylesheet" type="text/css" href="css/dashboard.css">
 </head>
-<body>
+<body style="overflow: hidden;">
 	<div class="gridster">
 		<ul>
-			<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-				<canvas id="chart1"></canvas>
+			<li data-row="1" data-col="1" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Burndown спринта</p>
+				<canvas class="line" id="burndownSprint"></canvas>
 			</li>
-			<li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
-				<canvas id="chart2"></canvas>
+			<li data-row="5" data-col="1" data-sizex="4" data-sizey="4">
+				<p class="block-title">Burndown эпика</p>
+				<canvas class="line" id="burndownEpic"></canvas>
 			</li>
-			<li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
-				<canvas id="chart3"></canvas>
+			<li data-row="9" data-col="1" data-sizex="4" data-sizey="4">
+				<p class="block-title">Burndown релиза</p>
+				<canvas class="line" id="burndownRelease"></canvas>
 			</li>
-			<li data-row="4" data-col="1" data-sizex="1" data-sizey="1">
-				<canvas id="chart4"></canvas>
+			<li data-row="1" data-col="5" data-sizex="2" data-sizey="2">
+				<p class="block-title">Задачи без PR / Proj</p>
+				<canvas class="indicatior" id="tasksWithoutPullRequestProject"></canvas>
 			</li>
-			<li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
-				<canvas id="chart5"></canvas>
+			<li data-row="3" data-col="5" data-sizex="2" data-sizey="2">
+				<p class="block-title">Задачи без PR / Team</p>
+				<canvas class="indicatior" id="tasksWithoutPullRequestTeam"></canvas>
+			</li>	
+			<li data-row="5" data-col="5" data-sizex="2" data-sizey="2">
+				<p class="block-title">Задачи без PR / Me</p>
+				<canvas class="indicatior" id="tasksWithoutPullRequestEmployee"></canvas>
 			</li>
+			<li data-row="7" data-col="5" data-sizex="2" data-sizey="2">
+				<p class="block-title">Задачи без PR / КЭ</p>
+				<canvas class="indicatior" id="tasksWithoutPullRequestKE"></canvas>
+			</li>
+
+			<li data-row="1" data-col="7" data-sizex="2" data-sizey="2">
+				<p class="block-title">Build (MR-1323)</p>
+				<canvas class="indicatior" id="branch1"></canvas>
+			</li>
+			<li data-row="3" data-col="7" data-sizex="2" data-sizey="2">
+				<p class="block-title">Build (MR-1326)</p>
+				<canvas class="indicatior" id="branch2"></canvas>
+			</li>
+			<li data-row="5" data-col="7" data-sizex="2" data-sizey="2">
+				<p class="block-title">Build (MR-1330)</p>
+				<canvas class="indicatior" id="branch3"></canvas>
+			</li>
+			<li data-row="7" data-col="7" data-sizex="2" data-sizey="2">
+				<p class="block-title">Build (Release/10)</p>
+				<canvas class="indicatior" id="branch4"></canvas>
+			</li>
+
+			<li data-row="9" data-col="5" data-sizex="2" data-sizey="4">
+				<p class="block-title">Unplanned work (%)</p>
+				<canvas class="pie" id="unplannedWorkPercent"></canvas>
+			</li>
+
+			<li data-row="9" data-col="7" data-sizex="2" data-sizey="4">
+				<p class="block-title">Unplanned work (SP)</p>
+				<canvas class="pie" id="unplannedWorkStoryPoints"></canvas>
+			</li>
+
+			<li data-row="1" data-col="9" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Технический долг</p>
+				<canvas class="line" id="sonarTechnicalDebt"></canvas>
+			</li>
+
+			<li data-row="5" data-col="9" data-sizex="2" data-sizey="2" >
+				<p class="block-title">Текущий технический долг</p>
+				<h3 class="success">15%</h3>
+			</li>
+
+			<li data-row="5" data-col="11" data-sizex="2" data-sizey="2" >
+				<p class="block-title">Текущее покрытие тестами</p>
+				<h3 class="bad">73%</h3>
+			</li>
+
+			<li data-row="7" data-col="9" data-sizex="2" data-sizey="2" >
+				<p class="block-title">Средний технический долг</p>
+				<h3 class="normal">23%</h3>
+			</li>
+
+			<li data-row="7" data-col="11" data-sizex="2" data-sizey="2" >
+				<p class="block-title">Среднее покрытие тестами</p>
+				<h3 class="bad">50%</h3>
+			</li>
+
+			<li data-row="9" data-col="9" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Покрытие тестами</p>
+				<canvas class="line" id="sonarTestCoverage"></canvas>
+			</li>
+
+			<li data-row="1" data-col="13" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Статусы задач</p>
+				<canvas class="bar" id="taskStatuses"></canvas>
+			</li>
+
+			<li data-row="5" data-col="13" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Дефекты / фичи (%)</p>
+				<canvas class="line" id="bugsAndFeaturesPercent"></canvas>
+			</li>
+
+			<li data-row="9" data-col="13" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Дефекты / фичи (SP)</p>
+				<canvas class="line" id="bugsAndFeaturesSP"></canvas>
+			</li>
+
+			<li data-row="13" data-col="1" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Среднее время на исправление критического дефекта</p>
+				<canvas class="line" id="criticalBugsRepair"></canvas>
+			</li>
+
+			<li data-row="13" data-col="5" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Среднее время согласования PR</p>
+				<canvas class="bar" id="timeToMergePR"></canvas>
+			</li>
+
+			<li data-row="13" data-col="9" data-sizex="2" data-sizey="4" >
+				<p class="block-title">Средний показатель CO2</p>
+				<h3 class="bad" style="padding: 40px;">762 ppm</h3>
+			</li>	
+
+			<li data-row="13" data-col="11" data-sizex="2" data-sizey="4" >
+				<p class="block-title">Настроение команды</p>
+				<h3 class="bad" style="font-size: 100px; padding-top: 25px;">&#128522;</h3>
+			</li>
+
+			<li data-row="13" data-col="13" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Среднее время на церемонии</p>
+				<canvas class="bar" id="ceremoniesAverageTime"></canvas>
+			</li>
+			<!-- <li data-row="13" data-col="1" data-sizex="4" data-sizey="4" >
+				<p class="block-title">Незакрытые деффекты</p>
+				<canvas class="scatter" id="unclosedBugs"></canvas>
+			</li> -->
 		</ul>
 	</div>
 </body>

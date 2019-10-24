@@ -2275,7 +2275,8 @@
 			container_width: this.container_width,
 			move_element: false,
 			resize: true,
-			limit: { width: this.options.max_cols !== Infinity || this.limit.width, height: this.options.max_rows !== Infinity || this.limit.height },
+			limit: { width: true, height: true } ,
+			//limit: { width: this.options.max_cols !== Infinity || this.limit.width, height: this.options.max_rows !== Infinity || this.limit.height },
 			scroll_container: this.options.scroll_container,
 			start: $.proxy(this.on_start_resize, this),
 			stop: $.proxy(function (event, ui) {

@@ -3,142 +3,337 @@ $(function(){ //DOM Ready
 	//instantiate gridster 
 	$(".gridster > ul").gridster({
 		widget_margins: [8, 8],
-		widget_base_dimensions: [300, 150],
-		extra_rows: 2,
-		extra_cols: 2
+		widget_base_dimensions: [95, 50],
+		extra_rows: 20,
+		extra_cols: 20,
+		min_rows: 30,
+		min_cols: 30,
+		max_rows: 30,
+		resize: {
+			enabled: true
+		}
 	});
-	
-	//fill first widget
-	firstChart();
 
-	//fill second widget
-	secondChart();
+	addBurndowns();
 
-	//fill third widget
-	thirdChart();
-	
-	//fill fourth widget
-	fourthChart();
+	addPieProgress("unplannedWorkPercent", 30, '%')
+	addPieProgress("unplannedWorkStoryPoints", 17, 'SP')
+	addLight('tasksWithoutPullRequestProject', 'Bad', 7, 'Количество');
+	addLight('tasksWithoutPullRequestTeam', 'Normal', 2, 'Количество');
+	addLight('tasksWithoutPullRequestEmployee', 'Success', 1, 'Количество');
+	addLight('tasksWithoutPullRequestKE', 'Not known', 1, 'Количество');
+	addLight('branch1', 'Success', 1, 'Success');
+	addLight('branch2', 'Success', 1, 'Success');
+	addLight('branch3', 'Success', 1, 'Success');
+	addLight('branch4', 'Bad', 1, 'Failure');
 
-	fifthChart();
-	
-	$("#export").on("click", function() {
-		exportDashboard();
-	});
+	addSonarMetrics();
+
+	addTaskStatuses();
+
+	//addUnclosedBugsSquadGartner();
+
+	addBugsAndFeatures();
+
+	addCriticalBugsRepair();
+
+	addTimeToMergePR();
+
+	addCeremoniesAverageTime();
 });
 
-function firstChart() {
-	var canvas = document.getElementById('chart1').getContext('2d');
+
+
+function addUnclosedBugsSquadGartner() {
+
+	var scatterChartData = {
+
+		datasets: [{
+			label: 'My First dataset',
+			borderColor: 'red',
+			backgroundColor: 'red',
+			fill: false,
+			showLine: false,
+			data: [{ x: 5, y: 5}, { x: -5, y: -5}, { x: -3, y: 3}, { x: 2, y: 1}, { x: 1, y: -4}, { x: -4, y: 3}]
+		}]
+	};
+	
+	var canvas = document.getElementById('unclosedBugs').getContext('2d');
 	new Chart(canvas, {
-		type: 'line',
-		data: {
-			labels: ["A", "B", "C", "O", "G", "W", "S"],
-			datasets: [{
-				label: 'Company A',
-				data: [12, 19, 3, 17, 6, 3, 7],
-				backgroundColor: "rgba(182, 213, 139, 0.5)"
-			}, {
-				label: 'Company B',
-				data: [2, 29, 5, 5, 2, 3, 10],
-				backgroundColor: "rgba(182, 133, 139, 1)"
-			}]
+		type: 'scatter',
+		data: scatterChartData,
+		options: {
+			legend: {
+				display: false
+			}
 		}
 	});
 }
 
-function secondChart() {
-	var canvas = document.getElementById("chart2").getContext('2d');
+function addBurndowns() {
+
+	var labels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+
+	var optimalDataset = {
+		label: 'Оптимальный',
+		data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0],
+		backgroundColor: "green",
+		borderColor: "green",
+		fill: false
+	}
+
+	var datasetsSprint = [optimalDataset, {
+		label: 'Текущий',
+		data: [100, 94, 82, 69, 60, 57, 50, 45],
+		backgroundColor: "blue",
+		borderColor: "blue",
+		fill: false
+	}];
+
+	var datasetsEpic = [optimalDataset, {
+		label: 'Текущий',
+		data: [100, 73, 65],
+		backgroundColor: "blue",
+		borderColor: "blue",
+		fill: false
+	}];
+
+	var datasetsRelease = [optimalDataset, {
+		label: 'Текущий',
+		data: [100, 71, 65, 60, 55, 50, 30, 28],
+		backgroundColor: "blue",
+		borderColor: "blue",
+		fill: false
+	}];
+
+
+	addLine('burndownSprint', labels, datasetsSprint, 'Story points', 'Days', true);
+	addLine('burndownEpic', labels, datasetsEpic, 'Story points', 'Days', true);
+	addLine('burndownRelease', labels, datasetsRelease, 'Story points', 'Days', true);
+}
+
+function addSonarMetrics() {
+	var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+	var datasetsDebt = [{
+		label: 'Техдолг',
+		data: [50, 30, 35, 21, 10, 15, 20, 30, 25, 15],
+		backgroundColor: "blue",
+		borderColor: "blue",
+		fill: false
+	}];
+
+	var datasetsTests = [{
+		label: 'Покрытие тестами',
+		data: [21, 25, 40, 45, 45, 51, 60, 71, 73, 73],
+		backgroundColor: "blue",
+		borderColor: "blue",
+		fill: false
+	}]
+
+	addLine('sonarTechnicalDebt', labels, datasetsDebt, '%', 'Months', false);
+	addLine('sonarTestCoverage', labels, datasetsTests, '%', 'Months', false);
+}
+
+function addTaskStatuses() {
+	var canvas = document.getElementById("taskStatuses").getContext('2d');
 	new Chart(canvas, {
 		type: 'bar',
 		data: {
-			labels: ["A", "B", "C", "O", "G", "W", "S"],
+			labels: ["Создана", "Запланирована", "Открыта", "В работе", "Завершена", "Отклонена"],
 			datasets: [{
-				label: 'Company C',
+				label: 'Задачи',
 				data: [12, 20, 3, 17, 30, 24, 7],
-				backgroundColor: "rgba(195, 161, 174, 1)"
-			}, {
-				label: 'Company D',
-				data: [35, 25, 5, 5, 21, 3, 10],
-				backgroundColor: "rgba(119, 150, 143, 1)"
+				backgroundColor: "blue"
 			}]
+		},
+		options: {
+			legend: {
+				display: false
+			}
 		}
 	});
 }
 
-function thirdChart() {
-	var canvas = document.getElementById("chart3").getContext('2d');
+function addBugsAndFeatures() {
+	var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+	var datasetsBugsFeaturePercent = [{
+		label: 'Отношение количества дефектов к количеству фич',
+		data: [11, 9, 5, 13, 5, 4, 5, 8, 3, 2],
+		backgroundColor: "blue",
+		borderColor: "blue",
+		fill: false
+	}];
+
+	var datasetsBugsFeatureSP = [{
+		label: 'Отношение количества дефектов к количеству фич',
+		data: [0.123, 0.093, 0.193, 0.185, 0.092, 0.050, 0.063, 0.099, 0.102, 0.089],
+		backgroundColor: "blue",
+		borderColor: "blue",
+		fill: false
+	}]
+
+	addLine('bugsAndFeaturesPercent', labels, datasetsBugsFeaturePercent, '%', 'Months', false);
+	addLine('bugsAndFeaturesSP', labels, datasetsBugsFeatureSP, 'SP', 'Months', false, 0.05, 1);
+}
+
+function addCriticalBugsRepair() {
+	var labels = ["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"];
+	var datasetsCriticalBugsRepair = [{
+		label: 'Время на исправление критичных дефектов',
+		data: [20, 35, 30, 25, 15, 15],
+		backgroundColor: "blue",
+		borderColor: "blue",
+		fill: false
+	}];
+
+	addLine('criticalBugsRepair', labels, datasetsCriticalBugsRepair, 'Days', '', false,  5, 50);
+}
+
+function addTimeToMergePR() {
+	var canvas = document.getElementById("timeToMergePR").getContext('2d');
+	var bar = new Chart(canvas, {
+		type: 'bar',
+		data: {
+			labels: ["4h", "8h", "16h", "More"],
+			datasets: [{
+				label: 'Количество',
+				data: [23, 15, 10, 3],
+				backgroundColor: ["green", "#ffe599", "orange", "red"]
+			}]
+		},
+		options: {
+			legend: {
+				display: false
+			}
+		}
+	});
+}
+
+function addCeremoniesAverageTime() {
+	var canvas = document.getElementById("ceremoniesAverageTime").getContext('2d');
 	new Chart(canvas, {
+		type: 'bar',
+		data: {
+			labels: ["Daily", "Retro", "Planning", "Review"],
+			datasets: [{
+				label: 'Минуты',
+				data: [28, 63, 125, 48],
+				backgroundColor: "#d9ead3"
+			}]
+		},
+		options: {
+			legend: {
+				
+			}
+		}
+	});
+}
+
+
+function addLine(id, labelsArray, datasetsArray, yTitle, xTitle, displayLegend, step = 5, maxV = 100) {
+	var canvas = document.getElementById(id).getContext('2d');
+
+	var config = {
+		type: 'line',
+		data: {
+			labels: labelsArray,
+			datasets: datasetsArray
+		},
+		options: {
+			scales: {
+				yAxes: [{
+				  scaleLabel: {
+					display: true,
+					labelString: yTitle
+				  },
+				  ticks: {
+					beginAtZero: true,
+					steps: 10,
+					stepValue: step,
+					max: maxV
+					}
+				}],
+				xAxes: [{
+					scaleLabel: {
+					  display: true,
+					  labelString: xTitle
+					}
+				}]
+			},
+			legend: {
+				display: displayLegend
+			}
+		}
+	}
+
+	new Chart(canvas, config);
+}
+
+function addPieProgress(id, value, label) {
+	var canvas = document.getElementById(id).getContext('2d');
+
+	var config = {
 		type: 'pie',
 		data: {
-			labels: ["A", "B", "C", "O", "G", "W", "S"],
+			labels: [label, ""],
 			datasets: [{
-				backgroundColor: [
-					"#00838f", 
-					"#ffd54f", 
-					"#8d6e63", 
-					"#90a4ae", 
-					"#4caf50", 
-					"#009688", 
-					"#e74c3c"
-					],
-					data: [12, 19, 3, 17, 28, 24, 7]
+				backgroundColor: [ "red", "lightGray" ],
+				data: [value, 100]
 			}]
+		},
+		options: {
+			legend: {
+				display: false
+			}
 		}
-	});
+	}
+
+	new Chart(canvas, config);
 }
 
-function fourthChart() {
-	var canvas = document.getElementById("chart4").getContext('2d');
-	new Chart(canvas, {
-		type: 'doughnut',
+function addLight(id, status, value, label) {
+
+	var color, label;
+
+	switch (status) {
+		case 'Bad':
+			color = "#f4cccc";
+			break;
+		case 'Normal':
+			color = "#ffe599";
+			break;
+		case 'Success':
+			color = "#d9ead3";
+			break;
+		default:
+			color = "lightGray";
+			break;
+	}
+	
+	let config = {
+		type: 'pie',
 		data: {
-			labels: ["A", "B", "C", "D", "E", "F", "G"],
 			datasets: [{
-				backgroundColor: [
-					"#01579b", 
-					"#1b5e20", 
-					"#827717", 
-					"#512da8", 
-					"#4e342e", 
-					"#424242", 
-					"#c51162"
-					],
-					data: [12, 19, 3, 17, 28, 24, 7]
-			}]
+				data: [value],
+				backgroundColor: [color],
+			}],
+			labels: [label]
+		},
+		options: {
+			responsive: true,
+			legend: {
+				display: false
+			}
 		}
-	});
+	};
+
+
+	let canvas = document.getElementById(id).getContext('2d');
+	new Chart(canvas, config);
+}
+
+function secondChart() {
+
 }
 
 
-function fifthChart() {
-	var canvas = document.getElementById("chart5").getContext('2d');
-	new Chart(canvas, {
-		type: 'doughnut',
-		data: {
-			labels: ["A", "B", "C", "D", "E", "F", "G"],
-			datasets: [{
-				backgroundColor: [
-					"#01579b", 
-					"#1b5e20", 
-					"#827717", 
-					"#512da8", 
-					"#4e342e", 
-					"#424242", 
-					"#c51162"
-					],
-					data: [12, 19, 3, 17, 28, 24, 7]
-			}]
-		}
-	});
-}
-
-
-function exportDashboard() {
-	//instantiate jsPDF 
-	var doc = new jsPDF('p','mm','a4');
-	doc.addHTML($("ul"), 15, 15, {
-		'background': '#fff',
-	}, function() {
-		doc.save('dashboard.pdf');
-	});
-}

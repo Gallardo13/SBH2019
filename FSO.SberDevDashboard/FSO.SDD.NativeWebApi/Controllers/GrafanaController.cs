@@ -1,5 +1,4 @@
-﻿                        //new float[] { Convert.ToSingle(random.NextDouble() * 1000), Convert.ToSingle(random.NextDouble() * 1000) },
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -94,7 +93,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
             };
 
             var list = new List<float[]>();
-            for (var dt = request.Range.From; dt <= request.Range.To; dt = dt.AddMinutes(30))
+            for (var dt = request.Range.From; dt <= request.Range.To; dt = dt.AddMinutes(5))
             {
                 var unixtime = dt.ToUnixTimeMilliseconds();
                 list.Add(new float[] { Convert.ToSingle(random.NextDouble() * 1000), unixtime });
