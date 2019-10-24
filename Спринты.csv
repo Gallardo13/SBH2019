@@ -1,0 +1,17 @@
+﻿ID,Дата начала,Дата конца,ProjectKey,TeamName,SprintEstimatedValue,TasksEstimationValue,StateId
+1,2-Sep,15-Sep,MR,Decepticons,80,53,3
+2,2-Sep,15-Sep,MR,Autobots,80,86,3
+3,16-Sep,29-Sep,MR,Decepticons,80,50,3
+4,16-Sep,29-Sep,MR,Autobots,80,43,3
+5,2-Sep,15-Sep,MR,Decepticons,80,50,3
+6,2-Sep,15-Sep,MR,Autobots,80,78,3
+7,16-Sep,29-Sep,MR,Decepticons,80,72,2
+8,16-Sep,29-Sep,MR,Autobots,80,59,2
+9,30-Sep,13-Oct,MR,Decepticons,80,102,1
+10,30-Sep,13-Oct,MR,Autobots,80,91,1
+11,14-Oct,27-Oct,MR,Decepticons,80,78,1
+12,14-Oct,27-Oct,MR,Autobots,80,68,1
+13,28-Oct,10-Nov,MR,Decepticons,80,77,1
+14,28-Oct,10-Nov,MR,Autobots,80,48,1
+15,11-Nov,24-Nov,MR,Decepticons,80,90,1
+16,11-Nov,24-Nov,MR,Autobots,80,110,1

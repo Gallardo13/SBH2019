@@ -1,0 +1,100 @@
+﻿ID,Key,AuthorID,Name,01.май,Дата обновления,Статус,Трудоемкость исходная,Трудоемкость потраченная,Трудоемкость остаток,Исполнитель,КЭ,Проектная область,Релиз,Severity,Спринт,PullRequest,Release,Epic
+1,MR-1,1,Ut id nisl quis enim dignissim sagi,3-May,12-May,4,9,8,0,3,3,MR,5,1,1,1,8,4
+3,MR-3,3,Nam eget dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra  per i,5-May,12-May,4,2,2,0,2,3,MR,5,0,1,3,8,1
+5,MR-5,3,Sed hendrerit. Sed augue ipsum  egestas nec ,7-May,17-May,4,9,8,0,1,3,MR,5,0,1,5,8,1
+7,MR-7,1,Sed mollis  eros et ultrices tempus  mauris ipsum aliquam libero  non adipisc,10-May,15-May,4,5,5,0,2,3,MR,5,0,1,7,8,1
+9,MR-9,1,Etiam feugiat lorem non m,11-May,16-May,4,1,1,0,3,3,MR,5,1,1,9,8,3
+11,MR-11,5,Maecenas tempus  tellus eget condimentum rhoncus  sem q,14-May,16-May,4,2,2,0,2,3,MR,5,1,1,11,8,1
+13,MR-13,4,Nullam nulla eros  ultricies sit amet  nonummy id ,17-May,19-May,4,4,4,0,1,3,MR,5,0,1,13,8,2
+15,MR-15,4,Donec posuere vulputate arcu. Suspendisse eu ligula. Praesent blandit laoreet nibh. Mauris t,18-May,25-May,4,9,8,0,2,3,MR,5,0,1,15,8,5
+17,MR-17,1,Nullam quis ante. Praesent vestibulum dapibus nibh. Ut id nisl quis enim dignissim sagittis,20-May,27-May,4,8,7,0,2,3,MR,5,0,1,17,8,3
+19,MR-19,5,Nam commodo suscipit quam. In turpis. Maecenas nec odio et ante tincidunt tempus. Nulla neque,22-May,23-May,4,4,4,0,1,3,MR,5,1,1,19,8,4
+21,MR-21,3,Quisque libero metus  condimentum nec  tempor a  commodo mollis  magna. Nullam quis ante. Cr,25-May,3-Jun,4,8,7,0,2,3,MR,5,0,1,21,8,4
+23,MR-23,2,Cum sociis natoque penatibus et magnis dis parturient montes  nascetur ridiculu,28-May,30-May,4,4,4,0,1,3,MR,5,1,1,23,8,5
+25,MR-25,1,Curabitur at lacus ac velit ornare lobortis. Duis vel nibh at velit sce,30-May,1-Jun,4,4,4,0,1,3,MR,5,0,1,25,8,1
+27,MR-27,5,Ut id nisl quis enim dignissim sagittis. Donec posuere vulputate ar,1-Jun,2-Jun,4,9,8,0,2,3,MR,5,0,3,27,8,4
+29,MR-29,2,Integer tincidunt. Etiam ultricies nisi vel,2-Jun,6-Jun,4,4,4,0,3,3,MR,5,0,3,29,8,3
+31,MR-31,5,Aliquam erat volutpat. Sed hendrerit. Praesent vestibulum dapibus nibh. M,3-Jun,13-Jun,4,4,4,0,1,3,MR,5,0,3,31,8,4
+33,MR-33,5,Donec pede justo  fringilla vel  a,4-Jun,8-Jun,4,3,3,0,2,1,MR,5,0,3,33,9,3
+35,MR-35,5,Proin viverra  ligula sit amet ultrices semper  ligula arcu tristique,5-Jun,8-Jun,4,2,2,0,3,1,MR,5,0,3,35,9,4
+37,MR-37,2,Phasellus a est. Nulla sit amet est. Pellen,8-Jun,17-Jun,4,9,8,0,2,1,MR,5,0,3,37,9,3
+39,MR-39,5,Phasellus accumsan cursus velit. Vivamus aliquet elit ac nisl. Proin magna. Phasellus ac,9-Jun,16-Jun,4,3,3,0,1,1,MR,5,0,3,39,9,5
+41,MR-41,4,Suspendisse eu ligula. Curabitur,12-Jun,15-Jun,4,1,1,0,1,1,MR,5,1,3,41,9,2
+43,MR-43,5,Proin viverra  ligula sit amet ultrices semper  ligula,14-Jun,16-Jun,4,4,4,0,2,1,MR,6,1,5,43,9,4
+45,MR-45,1,Nam ipsum risus  rutrum vitae  vestibulum eu  molest,17-Jun,26-Jun,4,3,3,0,1,1,MR,6,0,5,45,9,3
+47,MR-47,5,Fusce pharetra convallis urna. Pellentesque p,19-Jun,20-Jun,4,9,8,0,2,1,MR,6,0,5,47,9,4
+49,MR-49,3,Duis arcu tortor  suscipit eg,20-Jun,25-Jun,4,3,3,0,2,1,MR,6,0,5,49,9,3
+51,MR-51,1,Ut tincidunt tincidunt erat. Phasellus viverra nulla ut metus varius laoreet. P,22-Jun,30-Jun,4,4,4,0,1,1,MR,6,1,5,51,9,4
+53,MR-53,2,Suspendisse enim turpis  dictum sed  iaculis a  condimentum nec  nisi. Na,23-Jun,27-Jun,4,9,8,0,1,1,MR,6,0,5,53,9,7
+55,MR-55,5,Curabitur ullamcorper ultricies nisi. Sed magna purus  fermentum eu  tincidunt,24-Jun,26-Jun,4,8,7,0,2,1,MR,6,0,5,55,9,3
+57,MR-57,3,Aenean leo ligula  porttitor eu  consequa,25-Jun,28-Jun,4,8,7,0,2,1,MR,6,1,5,57,9,7
+59,MR-59,2,Etiam iaculis nunc ac metus. Donec elit libero  sodales nec  volutpat a  suscipit non  turpis. Prae,27-Jun,6-Jul,4,10,9,0,2,1,MR,6,1,5,59,9,3
+61,MR-61,4,Pellentesque ut neque. Vestibulum fringilla pede sit a,29-Jun,8-Jul,4,3,3,0,1,1,MR,6,0,5,61,9,4
+63,MR-63,3,Suspendisse non nisl sit amet velit hendrerit rutrum. Cras,1-Jul,2-Jul,4,5,5,0,3,1,MR,6,1,5,63,9,4
+65,MR-65,3,Vestibulum suscipit nulla quis orci. In auctor lobortis lacus. Nulla sit amet est. Cras non dol,4-Jul,8-Jul,4,10,9,0,3,1,MR,7,0,7,65,9,4
+67,MR-67,5,Aenean tellus metus  bibendum sed  posuere ac  mattis non  nunc. Nullam nulla eros  ultric,5-Jul,11-Jul,4,7,6,0,2,1,MR,7,0,7,67,9,7
+69,MR-69,2,Aenean imperdiet. Donec e,6-Jul,15-Jul,4,7,6,0,2,1,MR,7,1,7,69,9,6
+71,MR-71,3,Cras sagittis. Vestibulum ullamcorper mauris at ligula. Cras ultricies mi eu turpis hendr,8-Jul,16-Jul,4,3,3,0,2,1,MR,7,1,7,71,9,4
+73,MR-73,4,Phasellus viverra nulla ut metus varius laoreet. Vestibulu,11-Jul,17-Jul,4,3,3,0,1,4,MR,7,1,7,73,10,7
+75,MR-75,5,Vivamus euismod mauris. Vestibulum eu odi,14-Jul,15-Jul,4,4,4,0,3,4,MR,7,0,7,75,10,7
+77,MR-77,2,Class aptent taciti sociosqu ad litora torquent per conubia nostra,15-Jul,22-Jul,4,1,1,0,1,4,MR,7,0,7,77,10,7
+79,MR-79,2,Nam pretium turpis et arcu. Donec interdum  metus et hendrerit alique,18-Jul,26-Jul,4,1,1,0,1,4,MR,7,1,7,79,10,3
+81,MR-81,4,Pellentesque habitant morbi,21-Jul,30-Jul,4,10,9,0,1,4,MR,7,1,7,81,10,3
+83,MR-83,5,Vestibulum volutpat pretium libero. Nullam cursus lacinia erat. Morbi vestibulum volutpat enim,22-Jul,24-Jul,4,6,5,0,2,4,MR,7,0,7,83,10,6
+85,MR-85,1,In auctor lobortis lacus. Etiam feugiat lo,24-Jul,26-Jul,4,2,2,0,2,4,MR,7,1,7,85,10,6
+87,MR-87,2,Praesent ac sem eget est egestas volutpat. Ut non enim eleifend felis pretium feugiat. In dui magn,25-Jul,30-Jul,4,9,8,0,3,1,MR,7,1,9,87,11,5
+89,MR-89,1,Nullam cursus lacinia erat. Aenean viver,27-Jul,31-Jul,4,4,4,0,3,1,MR,7,0,9,89,11,5
+91,MR-91,2,Maecenas nec odio et ante tincidunt tempus. Quisque ut n,30-Jul,7-Aug,4,6,5,0,3,1,MR,7,0,9,91,11,3
+93,MR-93,2,Fusce a quam. Fusce egestas elit eget lorem.,31-Jul,10-Aug,4,9,8,0,3,1,MR,7,1,9,93,11,3
+95,MR-95,3,Nulla facilisi. Fusce vulputate eleifend sapien. Curabitur ve,2-Aug,4-Aug,4,2,2,0,1,1,MR,7,1,9,95,11,4
+97,MR-97,3,Phasellus leo dolor  tempus non  auctor et  he,4-Aug,9-Aug,4,8,7,0,1,1,MR,7,0,9,97,11,5
+99,MR-99,5,Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. S,5-Aug,8-Aug,4,8,7,0,1,1,MR,7,1,9,99,11,6
+101,MR-101,5,Donec quam felis  ultricies nec  pellentesque eu  pretium quis  sem. Eti,6-Aug,11-Aug,4,8,7,0,1,1,MR,8,1,9,101,11,8
+103,MR-103,3,Cras dapibus. Curabitur ullamcorper ultricies nisi. Duis leo. Phasellus gravida semper nis,9-Aug,18-Aug,4,5,5,0,3,1,MR,8,1,9,103,11,7
+105,MR-105,1,Sed cursus turpis vitae tortor. Integer ante arcu  accumsan a,11-Aug,21-Aug,4,7,6,0,3,1,MR,8,1,9,105,11,9
+107,MR-107,5,Donec sodales sagittis magna. Ut varius tincidunt libero. Quisque id odio. Null,12-Aug,20-Aug,4,4,4,0,2,1,MR,8,1,9,107,11,7
+109,MR-109,3,Sed in libero ut nibh placerat,13-Aug,16-Aug,4,4,4,0,1,1,MR,8,1,9,109,11,7
+111,MR-111,4,Vestibulum rutrum  mi nec ele,15-Aug,22-Aug,4,8,7,0,3,1,MR,8,0,9,111,11,6
+113,MR-113,4,Praesent metus tellus  elementum eu  semper a  adipiscing,18-Aug,26-Aug,4,5,5,0,3,1,MR,8,1,9,113,11,6
+115,MR-115,5,In hac habitasse platea dictumst. Nulla porta dolor. Suspendisse feugiat. Morbi vestibulum volutpat,21-Aug,24-Aug,4,2,2,0,2,1,MR,8,0,9,115,11,9
+117,MR-117,3,Vestibulum ullamcorper mauris a,22-Aug,31-Aug,4,4,4,0,1,2,MR,8,0,11,117,12,9
+119,MR-119,1,Ut varius tincidunt libero. Nullam sagittis. Praesent ut ligula no,25-Aug,4-Sep,4,4,4,0,3,2,MR,8,0,11,119,12,7
+121,MR-121,3,Nulla facilisi. Proin magna. Ut a nisl id ante tempus hendrerit. Praesent blandit laoreet n,27-Aug,6-Sep,4,8,7,0,3,2,MR,8,0,11,121,12,7
+123,MR-123,3,Suspendisse potenti. Praesent vestibulum dapib,29-Aug,30-Aug,3,10,9,8,1,2,MR,8,1,11,123,12,7
+125,MR-125,5,Nullam dictum felis eu pede mollis pretium. Quisque id mi. Pellentesque egestas  neque,31-Aug,10-Sep,3,8,7,6,1,2,MR,8,0,11,125,12,8
+127,MR-127,2,Class aptent taciti sociosqu ad litora torquent per conubia nostra  per inceptos h,2-Sep,10-Sep,3,6,5,4,3,2,MR,8,0,11,127,12,7
+129,MR-129,1,Pellentesque ut neque. Suspendisse eu ligula. Donec interdum  metus et hendrerit aliquet  dolor,5-Sep,6-Sep,3,5,5,3,2,2,MR,9,1,11,129,12,7
+131,MR-131,1,Phasellus accumsan cursus velit. Etiam sit amet orci eget eros faucibus tincidunt. Done,7-Sep,12-Sep,3,2,2,1,1,2,MR,9,0,11,131,12,7
+133,MR-133,4,Duis leo. Class aptent taciti sociosqu ad litora torquent p,8-Sep,16-Sep,3,7,6,3,3,2,MR,9,0,11,133,12,10
+135,MR-135,2,Proin magna. Praesent porttitor  nulla vitae posuere iaculis  arcu nisl digni,9-Sep,10-Sep,2,6,5,6,2,2,MR,9,1,11,135,12,10
+137,MR-137,5,Vivamus quis mi. Donec id justo. Aenean commod,10-Sep,16-Sep,2,9,8,9,1,2,MR,9,1,11,137,12,9
+139,MR-139,3,Vestibulum ante ipsum primis in faucibus orci luctus et ul,11-Sep,19-Sep,2,8,7,8,1,2,MR,9,1,11,139,12,8
+141,MR-141,2,Sed a libero. Suspendisse faucibus  nunc et pellentesque eg,13-Sep,19-Sep,2,10,9,10,1,2,MR,9,1,13,141,12,10
+143,MR-143,1,Ut leo. Praesent nonummy mi in odio. Praesent ac massa,15-Sep,25-Sep,2,2,2,2,3,2,MR,9,0,13,143,12,7
+145,MR-145,5,Praesent egestas neque eu enim. Aenean,18-Sep,20-Sep,2,6,5,6,3,2,MR,9,0,13,145,12,7
+147,MR-147,1,Nam adipiscing. Aenean viverra rhoncus pede. Nunc nonummy metus. Duis vel nibh at velit sceleris,20-Sep,26-Sep,2,5,5,5,3,2,MR,9,0,13,147,12,10
+149,MR-149,5,Pellentesque dapibus hendrerit,22-Sep,25-Sep,2,2,2,2,2,2,MR,9,0,13,149,12,7
+151,MR-151,4,Phasellus consectetuer vestibulum elit. Fusce egestas elit eget lorem,24-Sep,3-Oct,2,2,2,2,3,4,MR,9,0,13,151,13,6
+153,MR-153,5,Donec venenatis vulputate lorem. Proin vi,25-Sep,3-Oct,2,4,4,4,1,4,MR,9,0,13,153,13,10
+155,MR-155,4,Fusce commodo aliquam arcu. Phasellus blandit leo ut odio. Nulla sit amet,26-Sep,30-Sep,2,7,6,7,3,4,MR,9,1,13,155,13,7
+157,MR-157,1,Nulla porta dolor. Praesent nec nisl a pu,27-Sep,1-Oct,2,7,6,7,2,4,MR,9,1,13,157,13,8
+159,MR-159,2,Suspendisse pulvinar  augue ac venenatis condimentum  sem libero volutpat,28-Sep,29-Sep,2,5,5,5,2,4,MR,9,1,13,159,13,8
+161,MR-161,1,Nunc interdum lacus sit amet orci. Aliquam lobortis. Vestibulum rutrum  mi n,30-Sep,1-Oct,2,4,4,4,3,4,MR,9,1,13,161,13,10
+163,MR-163,3,Etiam feugiat lorem non metus.,2-Oct,10-Oct,2,6,5,6,1,4,MR,9,0,13,163,13,9
+165,MR-165,2,Fusce risus nisl  viverra et  tem,5-Oct,11-Oct,2,1,1,1,2,3,MR,10,0,15,165,14,10
+167,MR-167,5,Vestibulum dapibus nunc ac augue. Cura,7-Oct,17-Oct,2,8,7,8,3,3,MR,10,1,15,167,14,12
+169,MR-169,3,Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia,8-Oct,12-Oct,2,4,4,4,2,3,MR,10,0,15,169,14,11
+171,MR-171,5,Etiam rhoncus. Quisque id mi. Fusce pharetra co,9-Oct,11-Oct,2,1,1,1,2,3,MR,10,0,15,171,14,12
+173,MR-173,5,Vivamus laoreet. Suspendisse potenti.,11-Oct,17-Oct,2,5,5,5,3,3,MR,10,0,15,173,14,11
+175,MR-175,2,Vestibulum ante ipsum primis in faucibus orci luctus e,14-Oct,18-Oct,2,10,9,10,2,3,MR,10,0,15,175,14,8
+177,MR-177,3,Praesent blandit laoreet nibh. Donec vitae orci sed dolor rutrum auctor. Donec,15-Oct,25-Oct,2,5,5,5,2,3,MR,10,0,15,177,14,11
+179,MR-179,2,Donec mi odio  faucibus at  scelerisque quis  convalli,16-Oct,23-Oct,2,4,4,4,3,3,MR,10,0,15,179,14,8
+181,MR-181,5,Sed augue ipsum  egestas nec  vestibulum et  malesuada adipiscing  dui. Phas,17-Oct,18-Oct,1,8,7,8,2,3,MR,10,0,15,181,14,9
+183,MR-183,4,Suspendisse feugiat. Curabitur ullamcorper ultricies ni,18-Oct,19-Oct,1,5,5,5,1,3,MR,10,0,15,183,14,11
+185,MR-185,1,Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.,20-Oct,25-Oct,1,4,4,4,2,3,MR,10,0,15,185,14,11
+187,MR-187,3,Ut leo. Suspendisse feugiat. Fusce convallis metu,22-Oct,27-Oct,1,4,4,4,3,3,MR,10,1,15,187,14,9
+189,MR-189,5,Vestibulum rutrum  mi nec elementum vehicula  eros quam gravida nisl  id fringilla neque ante vel m,23-Oct,28-Oct,1,6,5,6,2,3,MR,10,1,15,189,14,12
+191,MR-191,3,Duis leo. Morbi mollis tellus ac sapien. Nam ipsum risus  rutrum vitae  vestibulum eu  molestie,26-Oct,3-Nov,1,10,9,10,3,3,MR,10,1,15,191,14,9
+193,MR-193,2,Vivamus laoreet. Donec quam felis  ultricies nec  pellentesque eu  pretium qu,27-Oct,28-Oct,1,6,5,6,3,3,MR,10,0,15,193,14,10
+195,MR-195,1,Fusce commodo aliquam arcu. Phasellus,30-Oct,5-Nov,1,10,9,10,1,3,MR,10,0,15,195,14,8
+197,MR-197,5,Curabitur suscipit suscipit tellus. Nullam accumsan lorem in,2-Nov,8-Nov,1,2,2,2,3,3,MR,10,0,15,197,14,11
