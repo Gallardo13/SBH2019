@@ -26,7 +26,10 @@ namespace FSO.SDD.DbModel
         /// <summary>
         /// На кого задача назначена
         /// </summary>
-        public User Owner { get; set; } 
+        public User Owner { get; set; }
+
+        public int OwnerId { get; set; }
+
 
         /// <summary>
         /// проектная область

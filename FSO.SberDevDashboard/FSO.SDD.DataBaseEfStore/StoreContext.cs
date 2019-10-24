@@ -31,6 +31,16 @@ namespace FSO.SDD.DataBaseEfStore
         public DbSet<DataFact> DataFacts { get; set; }
         public DbSet<DataSource> DataSources { get; set; }
 
+
+        public DbSet<GitBranch> GitBranches { get; set; }
+        public DbSet<GitCommit> GitCommits { get; set; }
+        public DbSet<GitCommitTask> GitCommitTasks { get; set; }
+
+        public DbSet<GitPullRequest> GitPullRequests { get; set; }
+        public DbSet<GitPullRequestApprover> GitPullRequestApprovers { get; set; }
+        public DbSet<GitPullRequestState> GitPullRequestStates { get; set; }
+
+
         private string DbPath { get; set; }
         public StoreContext(string dbPath)
         {
@@ -73,6 +83,13 @@ namespace FSO.SDD.DataBaseEfStore
             modelBuilder.Entity<DataFact>().ToTable("DataFacts");
             modelBuilder.Entity<DataSource>().ToTable("DataSources");
 
+
+            modelBuilder.Entity<GitBranch>().ToTable("GitBranches");
+            modelBuilder.Entity<GitCommit>().ToTable("GitCommits");
+            modelBuilder.Entity<GitCommitTask>().ToTable("GitCommitTasks"); 
+            modelBuilder.Entity<GitPullRequest>().ToTable("GitPullRequests");
+            modelBuilder.Entity<GitPullRequestApprover>().ToTable("GitPullRequestApprovers");
+            modelBuilder.Entity<GitPullRequestState>().ToTable("GitPullRequestStates");
         }
     }
 }

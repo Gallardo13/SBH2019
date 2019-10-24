@@ -8,6 +8,7 @@ namespace EfConsoleUtil
     {
         public DbSet<User> Users { get; set; }
 
+
         public DbSet<JiraEpic> JiraEpics { get; set; }
         public DbSet<JiraEpicTask> JiraEpicTasks { get; set; }
 
@@ -29,6 +30,16 @@ namespace EfConsoleUtil
         public DbSet<DataFact> DataFacts { get; set; }
         public DbSet<DataSource> DataSources { get; set; }
 
+
+        public DbSet<GitBranch> GitBranches { get; set; }
+        public DbSet<GitCommit> GitCommits { get; set; }
+        public DbSet<GitCommitTask> GitCommitTasks { get; set; }
+
+        public DbSet<GitPullRequest> GitPullRequests { get; set; }
+        public DbSet<GitPullRequestApprover> GitPullRequestApprovers { get; set; }
+        public DbSet<GitPullRequestState> GitPullRequestStates { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -38,7 +49,6 @@ namespace EfConsoleUtil
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("Users");
-
 
             modelBuilder.Entity<JiraEpic>().ToTable("JiraEpics");
             modelBuilder.Entity<JiraEpicTask>().ToTable("JiraEpicTasks");
@@ -64,6 +74,14 @@ namespace EfConsoleUtil
             modelBuilder.Entity<SourceSystem>().ToTable("SourceSystems");
             modelBuilder.Entity<DataFact>().ToTable("DataFacts");
             modelBuilder.Entity<DataSource>().ToTable("DataSources");
+
+
+            modelBuilder.Entity<GitBranch>().ToTable("GitBranches");
+            modelBuilder.Entity<GitCommit>().ToTable("GitCommits");
+            modelBuilder.Entity<GitCommitTask>().ToTable("GitCommitTasks");
+            modelBuilder.Entity<GitPullRequest>().ToTable("GitPullRequests");
+            modelBuilder.Entity<GitPullRequestApprover>().ToTable("GitPullRequestApprovers");
+            modelBuilder.Entity<GitPullRequestState>().ToTable("GitPullRequestStates");
         }
     }
 
