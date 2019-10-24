@@ -1,5 +1,6 @@
 ﻿using FSO.SDD.DbModel;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 using System;
 
 namespace FSO.SDD.DataBaseEfStore
