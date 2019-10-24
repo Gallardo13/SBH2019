@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace FSO.SDD.DbModel
 {
     /// <summary>
-    /// Пользователь
+    ///  - система (jira, git, dpm)
     /// </summary>
-    public class User
+    public class SourceSystem
     {
         /// <summary>
-        /// Идентификатор пользователя (автоинкремент)
+        /// Идентификатор (автоинкремент)
         /// </summary>
         [Key]
         public int Id { get; set; }
@@ -21,14 +20,9 @@ namespace FSO.SDD.DbModel
 
 
         /// <summary>
-        /// Имя
+        /// Описание
         /// </summary>
-        public string Login { get; set; }
-
-        /// <summary>
-        /// Почта
-        /// </summary>
-        public string Email { get; set; }
+        public string Description { get; set; }
 
     }
 }
