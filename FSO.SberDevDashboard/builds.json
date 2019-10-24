@@ -1,0 +1,10 @@
+[
+  {
+    "BuildNumber": "10",
+    "Status": "Ok"
+  },
+  {
+    "BuildNumber": "20",
+    "Status": "Error"
+  }
+]

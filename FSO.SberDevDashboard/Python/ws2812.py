@@ -36,3 +36,23 @@ def demo(np):
 	for i in range(n):
 		np[i] = (0, 0, 0)
 	np.write()
+
+def alert(np):
+	for i in range(255):
+		np[0] = (i, 0, 0)
+		np.write()
+		time.sleep_ms(25)
+
+	for i in range(255):
+		np[0] = (255 - i, i, i)
+		np.write()
+		time.sleep_ms(25)
+
+	for i in range(255):
+		np[0] = (i, 255 - i, 255 - i)
+		np.write()
+		time.sleep_ms(25)
+
+	# clear
+	np[0] = (0, 0, 0)
+	np.write()
