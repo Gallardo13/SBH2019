@@ -61,7 +61,7 @@ namespace ConsoleTest
             var sourceEpic = db.IndicatorValueSourceKeys.FirstOrDefault(s => s.SourceType == "JiraEpic" && s.SourceItemId == 17);
             if (sourceEpic == null)
             {
-                sourceEpic = new IndicatorValueSourceKey() { Id = 1, SourceType = "JiraEpic", SourceItemId = 17 };
+                sourceEpic = new IndicatorValueSourceKey() { Id = 2, SourceType = "JiraEpic", SourceItemId = 17 };
                 db.IndicatorValueSourceKeys.Add(sourceEpic);
 
             }
@@ -69,7 +69,7 @@ namespace ConsoleTest
             var sourceTask = db.IndicatorValueSourceKeys.FirstOrDefault(s => s.SourceType == "JiraTask" && s.SourceItemId == 94);
             if (sourceTask == null)
             {
-                sourceTask = new IndicatorValueSourceKey() { Id = 1, SourceType = "JiraTask", SourceItemId = 94 };
+                sourceTask = new IndicatorValueSourceKey() { Id = 3, SourceType = "JiraTask", SourceItemId = 94 };
                 db.IndicatorValueSourceKeys.Add(sourceTask);
 
             }
@@ -86,6 +86,8 @@ namespace ConsoleTest
             int sId = 0;
 
             FillSprint1(db, ref valId, dim, indicator, seriesActual, ref sId, sourceRelease, sourceEpic, sourceTask, seriesOptimal);
+
+
         }
 
         private static void FillSprint1(StoreContext db, ref int valId, IndicatorDimension dim, Indicator indicator,
