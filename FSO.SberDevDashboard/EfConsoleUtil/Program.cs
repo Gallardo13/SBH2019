@@ -40,6 +40,16 @@ namespace EfConsoleUtil
         public DbSet<GitPullRequestState> GitPullRequestStates { get; set; }
 
 
+        public DbSet<Metric> Metrics { get; set; }
+        public DbSet<IndicatorValuesSeries> IndicatorValuesSeries { get; set; }
+        public DbSet<IndicatorValueSourceKey> IndicatorValueSourceKeys { get; set; }
+        public DbSet<IndicatorValueSource> IndicatorValueSources { get; set; }
+        public DbSet<IndicatorValue> IndicatorValues { get; set; }
+        public DbSet<IndicatorSourceAggregate> IndicatorSourceAggregates { get; set; }
+        public DbSet<IndicatorDimension> IndicatorDimensions { get; set; }
+        public DbSet<Indicator> Indicators { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -48,6 +58,17 @@ namespace EfConsoleUtil
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Metric>().ToTable("Metrics");
+            modelBuilder.Entity<IndicatorValuesSeries>().ToTable("IndicatorValuesSeries");
+            modelBuilder.Entity<IndicatorValueSourceKey>().ToTable("IndicatorValueSourceKeys");
+            modelBuilder.Entity<IndicatorValueSource>().ToTable("IndicatorValueSources");
+            modelBuilder.Entity<IndicatorValue>().ToTable("IndicatorValues");
+            modelBuilder.Entity<IndicatorSourceAggregate>().ToTable("IndicatorSourceAggregates");
+            modelBuilder.Entity<IndicatorDimension>().ToTable("IndicatorDimensions");
+            modelBuilder.Entity<Indicator>().ToTable("Indicators");
+
+
             modelBuilder.Entity<User>().ToTable("Users");
 
             modelBuilder.Entity<JiraEpic>().ToTable("JiraEpics");

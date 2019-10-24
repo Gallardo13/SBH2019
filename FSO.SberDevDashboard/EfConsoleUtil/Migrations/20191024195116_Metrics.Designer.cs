@@ -3,14 +3,16 @@ using System;
 using EfConsoleUtil;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EfConsoleUtil.Migrations
 {
     [DbContext(typeof(StoreContextUtil))]
-    partial class StoreContextUtilModelSnapshot : ModelSnapshot
+    [Migration("20191024195116_Metrics")]
+    partial class Metrics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
