@@ -30,14 +30,14 @@ if pin.value() > 0:
     import urequests
 
     while True:
-        url = 'http://172.30.14.84/FSO.SDD.NativeWebApi/api/lastbuildstatus'
+        url = 'http://172.30.14.84/FSO.SDD.NativeWebApi/api/lastbuildstatus/10'
         print('check url: %s' % url)
         r = urequests.get(url).json()
 
         print(r["status"])
 
-        if r["status"] == False:
-            ws2812.demo(np)
+        if r["status"] != "Ok":
+            ws2812.demo2(np)
 
         #http_get(url)
         time.sleep(10)
