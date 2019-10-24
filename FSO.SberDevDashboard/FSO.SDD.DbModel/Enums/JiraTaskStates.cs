@@ -1,4 +1,4 @@
-﻿namespace FSO.SDD.DbModel
+﻿namespace FSO.SDD.DbModel.Enums
 {
     public enum JiraTaskStates
     {
