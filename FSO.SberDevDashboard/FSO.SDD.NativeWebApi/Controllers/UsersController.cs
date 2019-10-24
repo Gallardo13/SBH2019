@@ -1,43 +1,30 @@
-﻿using System;
+﻿using FSO.SDD.DataBaseEfStore;
+using FSO.SDD.DbModel;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using FSO.SDD.DataBaseEfStore;
-using FSO.SDD.DbModel;
 
 namespace FSO.SDD.NativeWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : HackController
     {
-        private readonly StoreContext _context;
+        public UsersController(StoreContext context) : base(context) { }
 
-        public UsersController(StoreContext context)
-        {
-            _context = new StoreContext();// @"..\..\..\..\FSO.SDD.DataBase.db");
-        }
-
-        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-        {
-            return await _context.Users.ToListAsync();
-        }
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers() =>
+            await _context.Users.ToListAsync();
 
-        // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)
-            {
                 return NotFound();
-            }
 
             return user;
         }

@@ -1,0 +1,100 @@
+﻿ID;Key;AuthorID;Name;01.май;Столбец1;Статус;Трудоемкость исходная;Трудоемкость потраченная;Трудоемкость остаток;Исполнитель;КЭ;Проектная область;Релиз;Severity;Спринт;;Названия строк;Труд.;Потр.;;;;;;;;;;;;;;;;;
+1;MR-1;1;Ut id nisl quis enim dignissim sagi;02.май;08.май;1;8;9;0;1;3;10;5;4;1;;1;34;40;;;;;;;;;;;;;;;;;5
+2;MR-2;3;Nam eget dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per i;03.май;11.май;1;6;7;0;2;2;10;5;3;1;;2;46;51;;;;;;;;;;;;;;;;;1
+3;MR-3;3;Sed hendrerit. Sed augue ipsum, egestas nec,;05.май;06.май;1;9;12;0;3;2;10;5;0;1;;3;17;23;;;;;;;;;;;;;;;;;8
+4;MR-4;1;Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipisc;07.май;10.май;1;2;3;0;4;1;10;5;1;1;;4;22;22;;;;;;;;;;;;;;;;;4
+5;MR-5;1;Etiam feugiat lorem non m;08.май;11.май;1;3;2;0;5;3;10;5;3;1;;5;37;45;;;;;;;;;;;;;;;;;5
+6;MR-6;5;Maecenas tempus, tellus eget condimentum rhoncus, sem q;10.май;14.май;1;6;7;0;1;2;10;5;5;1;;6;27;34;;;;;;;;;;;;;;;;;1
+7;MR-7;4;Nullam nulla eros, ultricies sit amet, nonummy id,;11.май;21.май;1;3;2;0;2;1;10;5;5;2;;7;27;30;;;;;;;;;;;;;;;;;9
+8;MR-8;4;Donec posuere vulputate arcu. Suspendisse eu ligula. Praesent blandit laoreet nibh. Mauris t;13.май;17.май;1;1;2;0;3;3;10;5;5;2;;8;38;46;;;;;;;;;;;;;;;;;5
+9;MR-9;1;Nullam quis ante. Praesent vestibulum dapibus nibh. Ut id nisl quis enim dignissim sagittis;14.май;15.май;1;9;7;0;4;2;10;5;3;2;;9;39;48;;;;;;;;;;;;;;;;;1
+10;MR-10;5;Nam commodo suscipit quam. In turpis. Maecenas nec odio et ante tincidunt tempus. Nulla neque;16.май;21.май;1;6;7;0;5;3;10;5;5;2;;10;42;51;;;;;;;;;;;;;;;;;8
+11;MR-11;3;Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Nullam quis ante. Cr;17.май;25.май;1;8;9;0;1;1;10;5;3;2;;11;25;31;;;;;;;;;;;;;;;;;1
+12;MR-12;2;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculu;19.май;21.май;1;9;12;0;2;2;10;5;0;2;;12;46;52;;;;;;;;;;;;;;;;;7
+13;MR-13;1;Curabitur at lacus ac velit ornare lobortis. Duis vel nibh at velit sce;21.май;28.май;1;10;12;0;3;1;10;5;2;2;;13;34;33;;;;;;;;;;;;;;;;;4
+14;MR-14;5;Ut id nisl quis enim dignissim sagittis. Donec posuere vulputate ar;22.май;23.май;1;8;11;0;4;1;10;5;5;3;;14;42;39;;;;;;;;;;;;;;;;;10
+15;MR-15;2;Integer tincidunt. Etiam ultricies nisi vel;23.май;02.июн;1;1;3;0;5;3;10;5;1;3;;15;50;59;;;;;;;;;;;;;;;;;2
+16;MR-16;5;Aliquam erat volutpat. Sed hendrerit. Praesent vestibulum dapibus nibh. M;24.май;03.июн;1;8;9;0;1;2;10;5;4;3;;16;41;46;;;;;;;;;;;;;;;;;1
+17;MR-17;5;Donec pede justo, fringilla vel, a;25.май;02.июн;1;5;7;0;2;3;10;5;0;4;;(пусто);;;;;;;;;;;;;;;;;;;4
+18;MR-18;5;Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique;28.май;30.май;1;4;3;0;3;1;10;5;5;4;;Общий итог;567;650;;;;;;;;;;;;;;;;;9
+19;MR-19;2;Phasellus a est. Nulla sit amet est. Pellen;29.май;08.июн;1;3;5;0;4;3;10;5;1;4;;;;;;;;;;;;;;;;;;;;;6
+20;MR-20;5;Phasellus accumsan cursus velit. Vivamus aliquet elit ac nisl. Proin magna. Phasellus ac;31.май;08.июн;1;2;1;0;5;1;10;5;0;4;;;;;;;;;;;;;;;;;;;;;5
+21;MR-21;4;Suspendisse eu ligula. Curabitur;01.июн;08.июн;1;8;6;0;1;1;10;5;1;4;;;;;;;;;;;;;;;;;;;;;8
+22;MR-22;5;Proin viverra, ligula sit amet ultrices semper, ligula;04.июн;07.июн;1;9;9;0;2;2;10;6;3;5;;;;;;;;;;;;;;;;;;;;;6
+23;MR-23;1;Nam ipsum risus, rutrum vitae, vestibulum eu, molest;07.июн;14.июн;1;10;13;0;3;3;10;6;2;5;;;;;;;;;;;;;;;;;;;;;10
+24;MR-24;5;Fusce pharetra convallis urna. Pellentesque p;09.июн;19.июн;1;4;7;0;4;1;10;6;3;5;;;;;;;;;;;;;;;;;;;;;1
+25;MR-25;3;Duis arcu tortor, suscipit eg;10.июн;16.июн;1;2;1;0;5;2;10;6;4;5;;;;;;;;;;;;;;;;;;;;;2
+26;MR-26;1;Ut tincidunt tincidunt erat. Phasellus viverra nulla ut metus varius laoreet. P;11.июн;15.июн;1;5;7;0;1;1;10;6;1;5;;;;;;;;;;;;;;;;;;;;;5
+27;MR-27;2;Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Na;14.июн;21.июн;1;7;8;0;2;2;10;6;4;5;;;;;;;;;;;;;;;;;;;;;10
+28;MR-28;5;Curabitur ullamcorper ultricies nisi. Sed magna purus, fermentum eu, tincidunt;16.июн;25.июн;1;1;4;0;3;2;10;6;2;6;;;;;;;;;;;;;;;;;;;;;6
+29;MR-29;3;Aenean leo ligula, porttitor eu, consequa;18.июн;22.июн;1;6;7;0;4;2;10;6;0;6;;;;;;;;;;;;;;;;;;;;;4
+30;MR-30;2;Etiam iaculis nunc ac metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Prae;20.июн;30.июн;1;7;9;0;5;2;10;6;1;6;;;;;;;;;;;;;;;;;;;;;7
+31;MR-31;4;Pellentesque ut neque. Vestibulum fringilla pede sit a;23.июн;24.июн;1;3;4;0;1;2;10;6;1;6;;;;;;;;;;;;;;;;;;;;;10
+32;MR-32;3;Suspendisse non nisl sit amet velit hendrerit rutrum. Cras;24.июн;02.июл;1;10;10;0;2;2;10;6;1;6;;;;;;;;;;;;;;;;;;;;;6
+33;MR-33;3;Vestibulum suscipit nulla quis orci. In auctor lobortis lacus. Nulla sit amet est. Cras non dol;27.июн;03.июл;1;3;4;0;3;3;10;7;0;7;;;;;;;;;;;;;;;;;;;;;8
+34;MR-34;5;Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Nullam nulla eros, ultric;29.июн;07.июл;1;10;10;0;4;3;10;7;3;7;;;;;;;;;;;;;;;;;;;;;1
+35;MR-35;2;Aenean imperdiet. Donec e;30.июн;02.июл;1;10;10;0;5;2;10;7;1;7;;;;;;;;;;;;;;;;;;;;;4
+36;MR-36;3;Cras sagittis. Vestibulum ullamcorper mauris at ligula. Cras ultricies mi eu turpis hendr;01.июл;05.июл;1;4;6;0;1;1;10;7;1;7;;;;;;;;;;;;;;;;;;;;;4
+37;MR-37;4;Phasellus viverra nulla ut metus varius laoreet. Vestibulu;03.июл;12.июл;1;8;11;0;2;2;10;7;2;8;;;;;;;;;;;;;;;;;;;;;4
+38;MR-38;5;Vivamus euismod mauris. Vestibulum eu odi;06.июл;12.июл;1;7;7;0;3;2;10;7;0;8;;;;;;;;;;;;;;;;;;;;;10
+39;MR-39;2;Class aptent taciti sociosqu ad litora torquent per conubia nostra;08.июл;09.июл;1;8;10;0;4;1;10;7;5;8;;;;;;;;;;;;;;;;;;;;;1
+40;MR-40;2;Nam pretium turpis et arcu. Donec interdum, metus et hendrerit alique;11.июл;13.июл;1;2;3;0;5;2;10;7;5;8;;;;;;;;;;;;;;;;;;;;;1
+41;MR-41;4;Pellentesque habitant morbi;13.июл;22.июл;1;1;4;0;1;2;10;7;0;8;;;;;;;;;;;;;;;;;;;;;6
+42;MR-42;5;Vestibulum volutpat pretium libero. Nullam cursus lacinia erat. Morbi vestibulum volutpat enim;14.июл;16.июл;1;9;8;0;2;1;10;7;2;8;;;;;;;;;;;;;;;;;;;;;1
+43;MR-43;1;In auctor lobortis lacus. Etiam feugiat lo;17.июл;25.июл;1;3;3;0;3;1;10;7;2;8;;;;;;;;;;;;;;;;;;;;;1
+44;MR-44;2;Praesent ac sem eget est egestas volutpat. Ut non enim eleifend felis pretium feugiat. In dui magn;20.июл;24.июл;1;5;8;0;4;3;10;7;0;9;;;;;;;;;;;;;;;;;;;;;1
+45;MR-45;1;Nullam cursus lacinia erat. Aenean viver;23.июл;30.июл;1;5;7;0;5;3;10;7;2;9;;;;;;;;;;;;;;;;;;;;;5
+46;MR-46;2;Maecenas nec odio et ante tincidunt tempus. Quisque ut n;24.июл;28.июл;1;9;10;0;1;2;10;7;4;9;;;;;;;;;;;;;;;;;;;;;7
+47;MR-47;2;Fusce a quam. Fusce egestas elit eget lorem.;27.июл;03.авг;1;10;9;0;2;2;10;7;1;9;;;;;;;;;;;;;;;;;;;;;9
+48;MR-48;3;Nulla facilisi. Fusce vulputate eleifend sapien. Curabitur ve;29.июл;31.июл;1;4;7;0;3;3;10;7;4;9;;;;;;;;;;;;;;;;;;;;;10
+49;MR-49;3;Phasellus leo dolor, tempus non, auctor et, he;30.июл;02.авг;1;3;4;0;4;2;10;7;4;9;;;;;;;;;;;;;;;;;;;;;7
+50;MR-50;5;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. S;31.июл;01.авг;1;3;3;0;5;1;10;7;3;9;;;;;;;;;;;;;;;;;;;;;4
+51;MR-51;5;Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Eti;01.авг;02.авг;1;5;7;0;1;2;10;8;5;10;;;;;;;;;;;;;;;;;;;;;1
+52;MR-52;3;Cras dapibus. Curabitur ullamcorper ultricies nisi. Duis leo. Phasellus gravida semper nis;02.авг;10.авг;1;3;5;0;2;3;10;8;3;10;;;;;;;;;;;;;;;;;;;;;5
+53;MR-53;1;Sed cursus turpis vitae tortor. Integer ante arcu, accumsan a;05.авг;06.авг;1;10;13;0;3;1;10;8;3;10;;;;;;;;;;;;;;;;;;;;;8
+54;MR-54;5;Donec sodales sagittis magna. Ut varius tincidunt libero. Quisque id odio. Null;08.авг;13.авг;1;4;5;0;4;1;10;8;5;10;;;;;;;;;;;;;;;;;;;;;1
+55;MR-55;3;Sed in libero ut nibh placerat;09.авг;17.авг;1;2;1;0;5;3;10;8;4;10;;;;;;;;;;;;;;;;;;;;;8
+56;MR-56;4;Vestibulum rutrum, mi nec ele;12.авг;14.авг;1;4;6;0;1;1;10;8;0;10;;;;;;;;;;;;;;;;;;;;;5
+57;MR-57;4;Praesent metus tellus, elementum eu, semper a, adipiscing;15.авг;22.авг;1;10;10;0;2;2;10;8;2;10;;;;;;;;;;;;;;;;;;;;;7
+58;MR-58;5;In hac habitasse platea dictumst. Nulla porta dolor. Suspendisse feugiat. Morbi vestibulum volutpat;16.авг;23.авг;1;4;4;0;3;2;10;8;1;10;;;;;;;;;;;;;;;;;;;;;6
+59;MR-59;3;Vestibulum ullamcorper mauris a;19.авг;21.авг;1;9;7;0;4;2;10;8;4;11;;;;;;;;;;;;;;;;;;;;;6
+60;MR-60;1;Ut varius tincidunt libero. Nullam sagittis. Praesent ut ligula no;21.авг;26.авг;1;6;9;0;5;3;10;8;4;11;;;;;;;;;;;;;;;;;;;;;8
+61;MR-61;3;Nulla facilisi. Proin magna. Ut a nisl id ante tempus hendrerit. Praesent blandit laoreet n;24.авг;29.авг;1;1;2;0;1;2;10;8;4;11;;;;;;;;;;;;;;;;;;;;;5
+62;MR-62;3;Suspendisse potenti. Praesent vestibulum dapib;26.авг;05.сен;1;1;4;0;2;1;10;8;4;11;;;;;;;;;;;;;;;;;;;;;10
+63;MR-63;5;Nullam dictum felis eu pede mollis pretium. Quisque id mi. Pellentesque egestas, neque;29.авг;05.сен;1;8;9;0;3;3;10;8;4;11;;;;;;;;;;;;;;;;;;;;;9
+64;MR-64;2;Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos h;31.авг;07.сен;1;1;4;0;4;1;10;8;2;12;;;;;;;;;;;;;;;;;;;;;3
+65;MR-65;1;Pellentesque ut neque. Suspendisse eu ligula. Donec interdum, metus et hendrerit aliquet, dolor;01.сен;10.сен;1;10;12;8;5;1;10;9;0;12;;;;;;;;;;;;;;;;;;;;;10
+66;MR-66;1;Phasellus accumsan cursus velit. Etiam sit amet orci eget eros faucibus tincidunt. Done;04.сен;05.сен;1;6;4;4;1;2;10;9;2;12;;;;;;;;;;;;;;;;;;;;;2
+67;MR-67;4;Duis leo. Class aptent taciti sociosqu ad litora torquent p;05.сен;12.сен;1;2;3;1;2;2;10;9;2;12;;;;;;;;;;;;;;;;;;;;;4
+68;MR-68;2;Proin magna. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl digni;07.сен;08.сен;1;10;9;5;3;2;10;9;4;12;;;;;;;;;;;;;;;;;;;;;5
+69;MR-69;5;Vivamus quis mi. Donec id justo. Aenean commod;09.сен;14.сен;1;7;7;7;4;1;10;9;3;12;;;;;;;;;;;;;;;;;;;;;4
+70;MR-70;3;Vestibulum ante ipsum primis in faucibus orci luctus et ul;11.сен;16.сен;1;10;13;10;5;1;10;9;4;12;;;;;;;;;;;;;;;;;;;;;10
+71;MR-71;2;Sed a libero. Suspendisse faucibus, nunc et pellentesque eg;12.сен;20.сен;1;10;8;10;1;3;10;9;5;13;;;;;;;;;;;;;;;;;;;;;10
+72;MR-72;1;Ut leo. Praesent nonummy mi in odio. Praesent ac massa;15.сен;16.сен;1;5;5;5;2;3;10;9;2;13;;;;;;;;;;;;;;;;;;;;;2
+73;MR-73;5;Praesent egestas neque eu enim. Aenean;17.сен;24.сен;1;3;6;3;3;1;10;9;2;13;;;;;;;;;;;;;;;;;;;;;1
+74;MR-74;1;Nam adipiscing. Aenean viverra rhoncus pede. Nunc nonummy metus. Duis vel nibh at velit sceleris;18.сен;28.сен;1;9;8;9;4;3;10;9;1;13;;;;;;;;;;;;;;;;;;;;;4
+75;MR-75;5;Pellentesque dapibus hendrerit;20.сен;24.сен;1;7;6;7;5;1;10;9;1;13;;;;;;;;;;;;;;;;;;;;;4
+76;MR-76;4;Phasellus consectetuer vestibulum elit. Fusce egestas elit eget lorem;22.сен;27.сен;1;5;3;5;1;1;10;9;4;14;;;;;;;;;;;;;;;;;;;;;8
+77;MR-77;5;Donec venenatis vulputate lorem. Proin vi;24.сен;03.окт;1;2;1;2;2;1;10;9;5;14;;;;;;;;;;;;;;;;;;;;;9
+78;MR-78;4;Fusce commodo aliquam arcu. Phasellus blandit leo ut odio. Nulla sit amet;27.сен;07.окт;1;7;6;7;3;3;10;9;3;14;;;;;;;;;;;;;;;;;;;;;9
+79;MR-79;1;Nulla porta dolor. Praesent nec nisl a pu;30.сен;01.окт;1;9;9;9;4;2;10;9;1;14;;;;;;;;;;;;;;;;;;;;;1
+80;MR-80;2;Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat;01.окт;03.окт;1;7;7;7;5;3;10;9;1;14;;;;;;;;;;;;;;;;;;;;;3
+81;MR-81;1;Nunc interdum lacus sit amet orci. Aliquam lobortis. Vestibulum rutrum, mi n;02.окт;04.окт;1;2;4;2;1;3;10;9;0;14;;;;;;;;;;;;;;;;;;;;;5
+82;MR-82;3;Etiam feugiat lorem non metus.;04.окт;14.окт;1;10;9;10;2;1;10;9;4;14;;;;;;;;;;;;;;;;;;;;;1
+83;MR-83;2;Fusce risus nisl, viverra et, tem;07.окт;10.окт;1;9;7;9;3;3;10;10;0;15;;;;;;;;;;;;;;;;;;;;;7
+84;MR-84;5;Vestibulum dapibus nunc ac augue. Cura;10.окт;12.окт;1;6;7;6;4;1;10;10;0;15;;;;;;;;;;;;;;;;;;;;;2
+85;MR-85;3;Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia;13.окт;19.окт;1;1;3;1;5;1;10;10;5;15;;;;;;;;;;;;;;;;;;;;;10
+86;MR-86;5;Etiam rhoncus. Quisque id mi. Fusce pharetra co;16.окт;18.окт;1;6;8;6;1;1;10;10;2;15;;;;;;;;;;;;;;;;;;;;;4
+87;MR-87;5;Vivamus laoreet. Suspendisse potenti.;18.окт;22.окт;1;9;10;9;2;2;10;10;2;15;;;;;;;;;;;;;;;;;;;;;4
+88;MR-88;2;Vestibulum ante ipsum primis in faucibus orci luctus e;19.окт;26.окт;1;9;11;9;3;1;10;10;5;15;;;;;;;;;;;;;;;;;;;;;2
+89;MR-89;3;Praesent blandit laoreet nibh. Donec vitae orci sed dolor rutrum auctor. Donec;22.окт;01.ноя;1;3;3;3;4;1;10;10;0;15;;;;;;;;;;;;;;;;;;;;;3
+90;MR-90;2;Donec mi odio, faucibus at, scelerisque quis, convalli;25.окт;03.ноя;1;7;10;7;5;3;10;10;3;15;;;;;;;;;;;;;;;;;;;;;9
+91;MR-91;5;Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Phas;26.окт;30.окт;1;6;6;6;1;2;10;10;2;16;;;;;;;;;;;;;;;;;;;;;1
+92;MR-92;4;Suspendisse feugiat. Curabitur ullamcorper ultricies ni;28.окт;01.ноя;1;6;4;6;2;2;10;10;3;16;;;;;;;;;;;;;;;;;;;;;10
+93;MR-93;1;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.;30.окт;01.ноя;1;8;11;8;3;3;10;10;4;16;;;;;;;;;;;;;;;;;;;;;10
+94;MR-94;3;Ut leo. Suspendisse feugiat. Fusce convallis metu;31.окт;07.ноя;1;1;4;1;4;1;10;10;3;16;;;;;;;;;;;;;;;;;;;;;3
+95;MR-95;5;Vestibulum rutrum, mi nec elementum vehicula, eros quam gravida nisl, id fringilla neque ante vel m;01.ноя;09.ноя;1;9;8;9;5;2;10;10;2;16;;;;;;;;;;;;;;;;;;;;;4
+96;MR-96;3;Duis leo. Morbi mollis tellus ac sapien. Nam ipsum risus, rutrum vitae, vestibulum eu, molestie;04.ноя;10.ноя;1;2;2;2;1;1;10;10;3;16;;;;;;;;;;;;;;;;;;;;;5
+97;MR-97;2;Vivamus laoreet. Donec quam felis, ultricies nec, pellentesque eu, pretium qu;07.ноя;17.ноя;1;3;4;3;2;3;10;10;2;16;;;;;;;;;;;;;;;;;;;;;10
+98;MR-98;1;Fusce commodo aliquam arcu. Phasellus;08.ноя;09.ноя;1;3;1;3;3;1;10;10;2;16;;;;;;;;;;;;;;;;;;;;;4
+99;MR-99;5;Curabitur suscipit suscipit tellus. Nullam accumsan lorem in;10.ноя;11.ноя;1;3;6;3;4;3;10;10;3;16;;;;;;;;;;;;;;;;;;;;;7

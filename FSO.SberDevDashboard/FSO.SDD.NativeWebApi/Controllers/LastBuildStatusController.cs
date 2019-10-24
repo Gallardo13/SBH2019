@@ -17,7 +17,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
             return new BuildStatus { Status = true };
         }
 
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public BuildStatus Get(int id)
         {
             return new BuildStatus { Status = false };
