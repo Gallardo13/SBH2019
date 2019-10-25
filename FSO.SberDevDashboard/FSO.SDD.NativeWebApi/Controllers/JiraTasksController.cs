@@ -65,29 +65,71 @@ namespace FSO.SDD.NativeWebApi.Controllers
         [HttpGet]
         public IEnumerable<ByStatusInfo> GetByStatus(ByType type, int id)
         {
-            var t = _context.JiraTasks.Include(e => e.State);
+            var t = _context.JiraTasks.Include(e => e.State).ToList();
+            var t2 = new List<int>();
 
             switch (type)
             {
                 case ByType.Sprint:
-                    t.Where(e => _context.JiraSprintTasks.Where(s => s.SprintId == id).Select(s => s.TaskId).Contains(e.Id));
+                    t2 = _context.JiraSprintTasks.Where(e => e.SprintId == id).Select(e => e.TaskId).ToList();
                     break;
 
                 case ByType.Epic:
-                    t.Where(e => _context.JiraEpicTasks.Where(s => s.EpicId == id).Select(s => s.EpicId).Contains(e.Id));
+                    t2 = _context.JiraEpicTasks.Where(e => e.EpicId == id).Select(e => e.TaskId).ToList();
                     break;
 
                 case ByType.Release:
-                    t.Where(e => _context.JiraReleaseTasks.Where(s => s.ReleaseId == id).Select(s => s.ReleaseId).Contains(e.Id));
+                    t2 = _context.JiraReleaseTasks.Where(e => e.ReleaseId == id).Select(e => e.TaskId).ToList();
                     break;
 
                 default:
                     return Enumerable.Empty<ByStatusInfo>();
             }
 
-            return t.ToList()
+            return t.Where(e => t2.Contains(e.Id))
                 .GroupBy(e => e.State)
                 .Select(e => new ByStatusInfo { State = e.Key.Name, Count = e.Count() });
+        }
+
+        public class ByTypeInfo
+        {
+            public int DefectInPercent { get; set; }
+            public int DefectsInStoryPoint { get; set; }
+        }
+
+        [Route("ByType/{type}/{id}")]
+        [HttpGet]
+        public ByTypeInfo GetByType(ByType type, int id)
+        {
+            var t = _context.JiraTasks.Include(e => e.State).ToList();
+            var t2 = new List<int>();
+
+            switch (type)
+            {
+                case ByType.Sprint:
+                    t2 = _context.JiraSprintTasks.Where(e => e.SprintId == id).Select(e => e.TaskId).ToList();
+                    break;
+
+                case ByType.Release:
+                    t2 = _context.JiraReleaseTasks.Where(e => e.ReleaseId == id).Select(e => e.TaskId).ToList();
+                    break;
+
+                default:
+                    return new ByTypeInfo();
+            }
+
+            var retVal =
+                t.Where(e => t2.Contains(e.Id)).Select(e => new { IsDefect = e.DefectSeverity > 0 ? true : false, e.OriginalEstimation })
+                .GroupBy(e => e.IsDefect)
+                .Select(e => new { IsDefect = e.Key, DefectInCount = e.Count(), DefectsInStoryPoint = e.Sum(t=>t.OriginalEstimation) });
+
+            var total = retVal.Sum(e => e.DefectInCount);
+
+            return new ByTypeInfo
+            {
+                DefectInPercent = (int)(retVal.Single(e => e.IsDefect).DefectInCount / (double)total * 100),
+                DefectsInStoryPoint = retVal.Single(e => e.IsDefect).DefectsInStoryPoint
+            };
         }
     }
 }
