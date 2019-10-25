@@ -1,6 +1,7 @@
 ﻿using FSO.SDD.DataBaseEfStore;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using FSO.SDD.NativeWebApi.Facades;
 
 namespace FSO.SDD.NativeWebApi.Controllers
 {
@@ -28,27 +29,9 @@ namespace FSO.SDD.NativeWebApi.Controllers
         [HttpGet("{type}")]
         public BurnDownInfo Get(BurnDownType type)
         {
-            var r = new Random((int)DateTime.Now.Ticks);
-
-            var retVal = new BurnDownInfo
-            {
-                StartDate = DateTime.Now.AddDays(-5 * (int)type),
-                EndDate = DateTime.Now.AddDays(5 * (int)type)
-            };
-
-            var days = new int[(retVal.EndDate - retVal.StartDate).Days + 1];
-            var total = 100;
-            days[0] = total;
-            for (int i = 1; i < days.Length; i++)
-            {
-                days[i] = total -= 100 / (days.Length - 1) + r.Next(-1, 2);
-                if (days[i] < 0)
-                    days[i] = 0;
-            }
-
-            retVal.Days = days;
-
-            return retVal;
+            var startDate = DateTime.Now.AddDays(-5 * (int)type);
+            var endDate = DateTime.Now.AddDays(5 * (int)type);
+            return new BurndownFacade().GetData(type, startDate, endDate);
         }
     }
 }

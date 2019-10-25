@@ -63,6 +63,87 @@ namespace EfConsoleUtil.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "IndicatorDimensions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndicatorDimensions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Indicators",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Indicators", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IndicatorSourceAggregates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SourceType = table.Column<string>(nullable: true),
+                    IndicatorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndicatorSourceAggregates", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IndicatorValueSourceKeys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SourceType = table.Column<string>(nullable: true),
+                    SourceItemId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndicatorValueSourceKeys", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IndicatorValueSources",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    IndicatorValueId = table.Column<int>(nullable: false),
+                    IndicatorValueSourceKeyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndicatorValueSources", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IndicatorValuesSeries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndicatorValuesSeries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "JiraEpics",
                 columns: table => new
                 {
@@ -189,6 +270,65 @@ namespace EfConsoleUtil.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Metrics",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    IndicatorId = table.Column<int>(nullable: false),
+                    MaxValue = table.Column<decimal>(nullable: false),
+                    MinValue = table.Column<decimal>(nullable: false),
+                    OptimalValueLow = table.Column<decimal>(nullable: false),
+                    OptimalValueHigh = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Metrics", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Metrics_Indicators_IndicatorId",
+                        column: x => x.IndicatorId,
+                        principalTable: "Indicators",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IndicatorValues",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    IndicatorId = table.Column<int>(nullable: false),
+                    DimensionId = table.Column<int>(nullable: false),
+                    IndicatorSeriesId = table.Column<int>(nullable: false),
+                    Value = table.Column<decimal>(nullable: false),
+                    DimensionValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndicatorValues", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_IndicatorValues_IndicatorDimensions_DimensionId",
+                        column: x => x.DimensionId,
+                        principalTable: "IndicatorDimensions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_IndicatorValues_Indicators_IndicatorId",
+                        column: x => x.IndicatorId,
+                        principalTable: "Indicators",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_IndicatorValues_IndicatorValuesSeries_IndicatorSeriesId",
+                        column: x => x.IndicatorSeriesId,
+                        principalTable: "IndicatorValuesSeries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -375,44 +515,6 @@ namespace EfConsoleUtil.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "JiraTaskHistorys",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    AuthorId = table.Column<int>(nullable: false),
-                    OwnerId = table.Column<int>(nullable: true),
-                    DefectSeverity = table.Column<int>(nullable: false),
-                    Estimation = table.Column<int>(nullable: false),
-                    Remainder = table.Column<int>(nullable: false),
-                    OriginalEstimation = table.Column<int>(nullable: false),
-                    UpdatedDateTime = table.Column<DateTime>(nullable: false),
-                    StateId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JiraTaskHistorys", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_JiraTaskHistorys_Users_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_JiraTaskHistorys_Users_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_JiraTaskHistorys_JiraTaskStates_StateId",
-                        column: x => x.StateId,
-                        principalTable: "JiraTaskStates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "JiraTasks",
                 columns: table => new
                 {
@@ -479,6 +581,44 @@ namespace EfConsoleUtil.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "JiraTaskHistorys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TaskId = table.Column<int>(nullable: false),
+                    OwnerId = table.Column<int>(nullable: false),
+                    DefectSeverity = table.Column<int>(nullable: false),
+                    Estimation = table.Column<int>(nullable: false),
+                    Remainder = table.Column<int>(nullable: false),
+                    OriginalEstimation = table.Column<int>(nullable: false),
+                    UpdatedDateTime = table.Column<DateTime>(nullable: false),
+                    StateId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JiraTaskHistorys", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JiraTaskHistorys_Users_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_JiraTaskHistorys_JiraTaskStates_StateId",
+                        column: x => x.StateId,
+                        principalTable: "JiraTaskStates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_JiraTaskHistorys_JiraTasks_TaskId",
+                        column: x => x.TaskId,
+                        principalTable: "JiraTasks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_DataFacts_SourceId",
                 table: "DataFacts",
@@ -515,6 +655,21 @@ namespace EfConsoleUtil.Migrations
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_IndicatorValues_DimensionId",
+                table: "IndicatorValues",
+                column: "DimensionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IndicatorValues_IndicatorId",
+                table: "IndicatorValues",
+                column: "IndicatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IndicatorValues_IndicatorSeriesId",
+                table: "IndicatorValues",
+                column: "IndicatorSeriesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_JiraReleaseHistorys_StateId",
                 table: "JiraReleaseHistorys",
                 column: "StateId");
@@ -535,11 +690,6 @@ namespace EfConsoleUtil.Migrations
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JiraTaskHistorys_AuthorId",
-                table: "JiraTaskHistorys",
-                column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_JiraTaskHistorys_OwnerId",
                 table: "JiraTaskHistorys",
                 column: "OwnerId");
@@ -548,6 +698,11 @@ namespace EfConsoleUtil.Migrations
                 name: "IX_JiraTaskHistorys_StateId",
                 table: "JiraTaskHistorys",
                 column: "StateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JiraTaskHistorys_TaskId",
+                table: "JiraTaskHistorys",
+                column: "TaskId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JiraTasks_AuthorId",
@@ -563,6 +718,11 @@ namespace EfConsoleUtil.Migrations
                 name: "IX_JiraTasks_StateId",
                 table: "JiraTasks",
                 column: "StateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Metrics_IndicatorId",
+                table: "Metrics",
+                column: "IndicatorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -581,6 +741,18 @@ namespace EfConsoleUtil.Migrations
 
             migrationBuilder.DropTable(
                 name: "GitPullRequests");
+
+            migrationBuilder.DropTable(
+                name: "IndicatorSourceAggregates");
+
+            migrationBuilder.DropTable(
+                name: "IndicatorValues");
+
+            migrationBuilder.DropTable(
+                name: "IndicatorValueSourceKeys");
+
+            migrationBuilder.DropTable(
+                name: "IndicatorValueSources");
 
             migrationBuilder.DropTable(
                 name: "JiraEpics");
@@ -610,7 +782,7 @@ namespace EfConsoleUtil.Migrations
                 name: "JiraTaskHistorys");
 
             migrationBuilder.DropTable(
-                name: "JiraTasks");
+                name: "Metrics");
 
             migrationBuilder.DropTable(
                 name: "DataSources");
@@ -622,19 +794,31 @@ namespace EfConsoleUtil.Migrations
                 name: "GitPullRequestStates");
 
             migrationBuilder.DropTable(
+                name: "IndicatorDimensions");
+
+            migrationBuilder.DropTable(
+                name: "IndicatorValuesSeries");
+
+            migrationBuilder.DropTable(
                 name: "JiraReleaseStates");
 
             migrationBuilder.DropTable(
                 name: "JiraSprintSates");
 
             migrationBuilder.DropTable(
+                name: "JiraTasks");
+
+            migrationBuilder.DropTable(
+                name: "Indicators");
+
+            migrationBuilder.DropTable(
+                name: "SourceSystems");
+
+            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
                 name: "JiraTaskStates");
-
-            migrationBuilder.DropTable(
-                name: "SourceSystems");
         }
     }
 }

@@ -38,5 +38,11 @@ namespace FSO.SDD.DbModel
         /// Значение показателя 
         /// </summary>
         public decimal Value { get; set; }
+
+        /// <summary>
+        /// Значение измерения (например, конкретная дата, если измерение - день)
+        /// </summary>
+        public string DimensionValue { get; set; }
+
     }
 }

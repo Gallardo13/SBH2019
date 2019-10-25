@@ -14,14 +14,16 @@ $(function(){ //DOM Ready
 		}
 	});
 
+	// real requests
 	addBurndowns();
+	addTasksWithoutPR();
+
+	// static data
 
 	addPieProgress("unplannedWorkPercent", 30, '%')
 	addPieProgress("unplannedWorkStoryPoints", 17, 'SP')
-	addLight('tasksWithoutPullRequestProject', 'Bad', 7, 'Количество');
-	addLight('tasksWithoutPullRequestTeam', 'Normal', 2, 'Количество');
-	addLight('tasksWithoutPullRequestEmployee', 'Success', 1, 'Количество');
-	addLight('tasksWithoutPullRequestKE', 'Not known', 1, 'Количество');
+
+
 	addLight('branch1', 'Success', 1, 'Success');
 	addLight('branch2', 'Success', 1, 'Success');
 	addLight('branch3', 'Success', 1, 'Success');
@@ -40,6 +42,15 @@ $(function(){ //DOM Ready
 	addTimeToMergePR();
 
 	addCeremoniesAverageTime();
+
+	addTeamMood();
+
+	// var lis = document.getElementsByTagName('li');
+	// var colors = ['red', 'yellow', 'green', 'blue', 'orange', 'pink']
+
+	// for (var i = 0; i < lis.length; i++) {
+	// 	lis[i].style.backgroundColor = colors[Math.floor(Math.random()*(lis.length - 1))];
+	// }
 });
 
 
@@ -72,55 +83,151 @@ function addUnclosedBugsSquadGartner() {
 
 function addBurndowns() {
 
-	var labels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-
-	var optimalDataset = {
+	let optimalDataset = {
 		label: 'Оптимальный',
-		data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0],
 		backgroundColor: "green",
 		borderColor: "green",
 		fill: false
 	}
 
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/BurnDown/1",
+		success: (data) => processBurndown("burndownSprint", optimalDataset, data),
+		error: (error) => console.error(e)
+	})
+
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/BurnDown/2",
+		success: (data) => processBurndown("burndownEpic", optimalDataset, data),
+		error: (error) => console.error(e)
+	})
+
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/BurnDown/3",
+		success: (data) => processBurndown("burndownRelease", optimalDataset, data),
+		error: (error) => console.error(e)
+	})
+
+
+	// var datasetsEpic = [optimalDataset, {
+	// 	label: 'Текущий',
+	// 	data: [100, 73, 65],
+	// 	backgroundColor: "blue",
+	// 	borderColor: "blue",
+	// 	fill: false
+	// }];
+
+	// var datasetsRelease = [optimalDataset, {
+	// 	label: 'Текущий',
+	// 	data: [100, 71, 65, 60, 55, 50, 30, 28],
+	// 	backgroundColor: "blue",
+	// 	borderColor: "blue",
+	// 	fill: false
+	// }];
+
+
+	
+	// addLine('burndownEpic', labels, datasetsEpic, 'Story points', 'Days', true);
+	// addLine('burndownRelease', labels, datasetsRelease, 'Story points', 'Days', true);
+}
+
+function processBurndown(id, optimalDataset, loadedData) {
+	let labels = ["0"];
+	let localOptimalDataset = optimalDataset;
+
+	var total = 100;
+	var step = total / (loadedData.days.length - 1);
+	localOptimalDataset.data = [total];
+
+	for (var i = 1; i < loadedData.days.length; i++) {
+		total -= step;
+		localOptimalDataset.data.push(total);
+		labels.push(i);
+	}
+	
 	var datasetsSprint = [optimalDataset, {
 		label: 'Текущий',
-		data: [100, 94, 82, 69, 60, 57, 50, 45],
+		data: loadedData.days,
 		backgroundColor: "blue",
 		borderColor: "blue",
 		fill: false
 	}];
 
-	var datasetsEpic = [optimalDataset, {
-		label: 'Текущий',
-		data: [100, 73, 65],
-		backgroundColor: "blue",
-		borderColor: "blue",
-		fill: false
-	}];
+	addLine(id, labels, datasetsSprint, 'Story points', 'Days', true);
 
-	var datasetsRelease = [optimalDataset, {
-		label: 'Текущий',
-		data: [100, 71, 65, 60, 55, 50, 30, 28],
-		backgroundColor: "blue",
-		borderColor: "blue",
-		fill: false
-	}];
+}
+
+function addTasksWithoutPR() {
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/jiratasks/wopullrequest/1/1",
+		success: (data) => {
+			var status = data > 2 ? 'Bad' : data > 0 ? 'Normal' : 'Success';
+			addLight('tasksWithoutPullRequestProject', status, data, 'Количество');
+		},
+		error: (error) => console.error(e)
+	})
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/jiratasks/wopullrequest/2/1",
+		success: (data) => {
+			var status = data > 2 ? 'Bad' : data > 0 ? 'Normal' : 'Success';
+			addLight('tasksWithoutPullRequestTeam', status, data, 'Количество');
+		},
+		error: (error) => console.error(e)
+	})
 
 
-	addLine('burndownSprint', labels, datasetsSprint, 'Story points', 'Days', true);
-	addLine('burndownEpic', labels, datasetsEpic, 'Story points', 'Days', true);
-	addLine('burndownRelease', labels, datasetsRelease, 'Story points', 'Days', true);
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/jiratasks/wopullrequest/3/1",
+		success: (data) => {
+			var status = data > 2 ? 'Bad' : data > 0 ? 'Normal' : 'Success';
+			addLight('tasksWithoutPullRequestEmployee', status, data, 'Количество');
+		},
+		error: (error) => console.error(e)
+	})
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/jiratasks/wopullrequest/4/1",
+		success: (data) => {
+			var status = data > 2 ? 'Bad' : data > 0 ? 'Normal' : 'Success';
+			addLight('tasksWithoutPullRequestKE', status, data, 'Количество');
+		},
+		error: (error) => console.error(e)
+	})
 }
 
 function addSonarMetrics() {
+
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/release/TechnicalDebt",
+		success: (data) => {
+
+			var datasetsDebt = [{
+				label: 'Техдолг',
+				data: [],
+				backgroundColor: "blue",
+				borderColor: "blue",
+				fill: false
+			}];
+
+			var labels = [];
+			for (var i = 0; i < data.length; i++) {
+				labels.push('Релиз ' + data[i].releaseID);
+				datasetsDebt[0].data.push(data[i].percent);
+			}
+
+			addLine('sonarTechnicalDebt', labels, datasetsDebt, '%', 'Релизы', false);
+		},
+		error: (error) => console.error(e)
+	})
+
+	
+
 	var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
-	var datasetsDebt = [{
-		label: 'Техдолг',
-		data: [50, 30, 35, 21, 10, 15, 20, 30, 25, 15],
-		backgroundColor: "blue",
-		borderColor: "blue",
-		fill: false
-	}];
+	
 
 	var datasetsTests = [{
 		label: 'Покрытие тестами',
@@ -130,7 +237,7 @@ function addSonarMetrics() {
 		fill: false
 	}]
 
-	addLine('sonarTechnicalDebt', labels, datasetsDebt, '%', 'Months', false);
+	
 	addLine('sonarTestCoverage', labels, datasetsTests, '%', 'Months', false);
 }
 
@@ -229,6 +336,26 @@ function addCeremoniesAverageTime() {
 	});
 }
 
+function addTeamMood() {
+	var mood = Date.now() % 3;
+	switch (mood) {
+		case 0:
+			document.getElementById('teamMood').innerHTML = "&#128522";
+			break;
+		case 1:
+			document.getElementById('teamMood').innerHTML = "&#128528";
+			break;
+		case 2: 
+			document.getElementById('teamMood').innerHTML = "&#128545";
+			break;
+		default:
+			break;
+	}
+	
+	// &#128522 - lucky
+	// &#128528 - usual
+	// &#128545 - angry
+}
 
 function addLine(id, labelsArray, datasetsArray, yTitle, xTitle, displayLegend, step = 5, maxV = 100) {
 	var canvas = document.getElementById(id).getContext('2d');
@@ -304,6 +431,7 @@ function addLight(id, status, value, label) {
 			break;
 		case 'Success':
 			color = "#d9ead3";
+			if (value == 0) value = 100;
 			break;
 		default:
 			color = "lightGray";
