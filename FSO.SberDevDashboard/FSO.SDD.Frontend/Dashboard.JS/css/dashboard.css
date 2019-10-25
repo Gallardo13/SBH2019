@@ -83,3 +83,7 @@ canvas.pie {
 .bad {
 	color: red;
 }
+
+li:not(.ready) {
+	background-color: lightgray !important;
+}

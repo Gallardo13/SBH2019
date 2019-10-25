@@ -17,34 +17,31 @@ $(function(){ //DOM Ready
 	// real requests
 	addBurndowns();
 	addTasksWithoutPR();
+	addSonarMetrics();
+	addTaskStatuses();
+	addTimeToMergePR();
+	addCO2();
+	addTeamMood();
+	addBugsAndFeatures();
+	addCriticalBugsRepair();
 
 	// static data
 
 	addPieProgress("unplannedWorkPercent", 30, '%')
 	addPieProgress("unplannedWorkStoryPoints", 17, 'SP')
 
-
 	addLight('branch1', 'Success', 1, 'Success');
 	addLight('branch2', 'Success', 1, 'Success');
 	addLight('branch3', 'Success', 1, 'Success');
 	addLight('branch4', 'Bad', 1, 'Failure');
 
-	addSonarMetrics();
+	
 
-	addTaskStatuses();
-
-	//addUnclosedBugsSquadGartner();
-
-	addBugsAndFeatures();
-
-	addCriticalBugsRepair();
-
-	addTimeToMergePR();
 
 	addCeremoniesAverageTime();
 
-	addTeamMood();
-
+	//addUnclosedBugsSquadGartner();
+	
 	// var lis = document.getElementsByTagName('li');
 	// var colors = ['red', 'yellow', 'green', 'blue', 'orange', 'pink']
 
@@ -299,119 +296,240 @@ function addSonarMetrics() {
 }
 
 function addTaskStatuses() {
-	var canvas = document.getElementById("taskStatuses").getContext('2d');
-	new Chart(canvas, {
-		type: 'bar',
-		data: {
-			labels: ["Создана", "Запланирована", "Открыта", "В работе", "Завершена", "Отклонена"],
-			datasets: [{
-				label: 'Задачи',
-				data: [12, 20, 3, 17, 30, 24, 7],
-				backgroundColor: "blue"
-			}]
-		},
-		options: {
-			legend: {
-				display: false
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/jiratasks/ByStatus/1/11",
+		success: (data) => {
+
+			var canvas = document.getElementById("taskStatuses").getContext('2d');
+
+			var config = {
+				type: 'bar',
+				data: {
+					labels: [],
+					datasets: [{
+						label: 'Задачи',
+						data: [],
+						backgroundColor: "blue"
+					}]
+				},
+				options: {
+					legend: {
+						display: false
+					},
+					scales: {
+						yAxes: [{
+						  ticks: {
+							beginAtZero: true
+						  }
+						}],
+						
+					},
+				}
+			};
+
+			for (var i = 0; i < data.length; i++) {
+				config.data.labels.push(data[i].state);
+				config.data.datasets[0].data.push(data[i].count);
 			}
-		}
+
+
+			new Chart(canvas, config);
+
+		},
+		error: (error) => console.error(e)
+	
 	});
 }
 
 function addBugsAndFeatures() {
-	var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
-	var datasetsBugsFeaturePercent = [{
-		label: 'Отношение количества дефектов к количеству фич',
-		data: [11, 9, 5, 13, 5, 4, 5, 8, 3, 2],
-		backgroundColor: "blue",
-		borderColor: "blue",
-		fill: false
-	}];
 
-	var datasetsBugsFeatureSP = [{
-		label: 'Отношение количества дефектов к количеству фич',
-		data: [0.123, 0.093, 0.193, 0.185, 0.092, 0.050, 0.063, 0.099, 0.102, 0.089],
-		backgroundColor: "blue",
-		borderColor: "blue",
-		fill: false
-	}]
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/jiratasks/ByType/1",
+		success: (data) => {
 
-	addLine('bugsAndFeaturesPercent', labels, datasetsBugsFeaturePercent, '%', 'Months', false);
-	addLine('bugsAndFeaturesSP', labels, datasetsBugsFeatureSP, 'SP', 'Months', false, 0.05, 1);
+			var labels = [""];
+
+			var datasetsBugsFeaturePercent = [{
+				label: 'Отношение количества дефектов к количеству фич',
+				data: [],
+				backgroundColor: "blue",
+				borderColor: "blue",
+				fill: false
+			}];
+		
+			var datasetsBugsFeatureSP = [{
+				label: 'Отношение количества дефектов к количеству фич',
+				data: [],
+				backgroundColor: "blue",
+				borderColor: "blue",
+				fill: false
+			}]
+
+			for (var i = 0; i < data.length; i++) {
+				var number = i+1;
+				labels.push('Sprint ' + (i+1));
+				datasetsBugsFeaturePercent[0].data.push(data[i].defectInPercent);
+				datasetsBugsFeatureSP[0].data.push(data[i].defectsInStoryPoint);
+			}
+
+			addLine('bugsAndFeaturesPercent', labels, datasetsBugsFeaturePercent, '%', '', false);
+			addLine('bugsAndFeaturesSP', labels, datasetsBugsFeatureSP, 'SP', '', false);
+		},
+		error: (error) => console.error(e)
+	})
+
+	
+
+
 }
 
 function addCriticalBugsRepair() {
-	var labels = ["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"];
-	var datasetsCriticalBugsRepair = [{
-		label: 'Время на исправление критичных дефектов',
-		data: [20, 35, 30, 25, 15, 15],
-		backgroundColor: "blue",
-		borderColor: "blue",
-		fill: false
-	}];
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/jiratasks/CriticalBugResolve",
+		success: (data) => {
+			var labels = [];
+			var datasetsCriticalBugsRepair = [{
+				label: 'Время на исправление критичных дефектов',
+				data: [],
+				backgroundColor: "blue",
+				borderColor: "blue",
+				fill: false
+			}];
 
-	addLine('criticalBugsRepair', labels, datasetsCriticalBugsRepair, 'Days', '', false,  5, 50);
+			for (var i = 0; i < data.length; i++) {
+				labels.push("Sprint " + data[i].sprintId)
+				datasetsCriticalBugsRepair[0].data.push(data[i].days)
+			}
+
+			addLine('criticalBugsRepair', labels, datasetsCriticalBugsRepair, 'Days', '', false,  5, 20);
+		},
+
+		error: (error) => console.error(e)
+	})
 }
 
 function addTimeToMergePR() {
-	var canvas = document.getElementById("timeToMergePR").getContext('2d');
-	var bar = new Chart(canvas, {
-		type: 'bar',
-		data: {
-			labels: ["4h", "8h", "16h", "More"],
-			datasets: [{
-				label: 'Количество',
-				data: [23, 15, 10, 3],
-				backgroundColor: ["green", "#ffe599", "orange", "red"]
-			}]
-		},
-		options: {
-			legend: {
-				display: false
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/PoolRequests/confirmationtime",
+		success: (data) => {
+
+			var canvas = document.getElementById("timeToMergePR").getContext('2d');
+
+			var config = {
+				type: 'bar',
+				data: {
+					labels: ["4h", "8h", "16h", "More"],
+					datasets: [{
+						label: 'Количество',
+						data: [],
+						backgroundColor: ["green", "#ffe599", "orange", "red"]
+					}]
+				},
+				options: {
+					legend: {
+						display: false
+					},
+					scales: {
+						yAxes: [{
+						  ticks: {
+							beginAtZero: true
+						  }
+						}],
+					}
+				}
+			};
+
+			for (var i = 0; i < data.length; i++) {
+				config.data.datasets[0].data.push(data[i]);
 			}
-		}
+
+
+			new Chart(canvas, config);
+
+		},
+		error: (error) => console.error(e)
+	
 	});
+
 }
 
 function addCeremoniesAverageTime() {
-	var canvas = document.getElementById("ceremoniesAverageTime").getContext('2d');
-	new Chart(canvas, {
-		type: 'bar',
-		data: {
-			labels: ["Daily", "Retro", "Planning", "Review"],
-			datasets: [{
-				label: 'Минуты',
-				data: [28, 63, 125, 48],
-				backgroundColor: "#d9ead3"
-			}]
-		},
-		options: {
-			legend: {
-				
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/scrum/CeremonialTiming/1/14",
+		success: (data) => {
+
+			var labels = [];
+			var datasetsCeremonies = [{
+				data: [],
+				backgroundColor: "blue",
+				borderColor: "blue",
+				fill: false
+			}];
+
+			for (var i = 0; i < data.length; i++) {
+				labels.push(data[i]);
+				datasetsCeremonies[0].data.push(data[i])
 			}
-		}
-	});
+
+			addLine('ceremoniesAverageTime', labels, datasetsCeremonies, 'Minutes', 'Days', false, 2, 20);
+		},
+
+		error: (error) => console.error(e)
+	})
+}
+
+function addCO2() {
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/Fun/co2/1",
+		success: (data) => {
+			var co2 = document.getElementById('CO2');
+			co2.innerText = data + " ppm";
+
+			if (data < 700) {
+				co2.classList.add("success");
+			} else if (data >= 700 && data < 800) {
+				co2.classList.add("normal");
+			} else if (data >= 800) {
+				co2.classList.add("bad");
+			}
+		},
+		error: (error) => console.error(e)
+	})
+
 }
 
 function addTeamMood() {
-	var mood = Date.now() % 3;
-	switch (mood) {
-		case 0:
-			document.getElementById('teamMood').innerHTML = "&#128522";
-			break;
-		case 1:
-			document.getElementById('teamMood').innerHTML = "&#128528";
-			break;
-		case 2: 
-			document.getElementById('teamMood').innerHTML = "&#128545";
-			break;
-		default:
-			break;
-	}
+
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/scrum/CommandFeeling/1",
+		success: (data) => {
+			switch (data[0]) {
+				case "Good":
+					document.getElementById('teamMood').innerHTML = "&#128522";
+					break;
+				case "Normal":
+					document.getElementById('teamMood').innerHTML = "&#128528";
+					break;
+				case "Bad": 
+					document.getElementById('teamMood').innerHTML = "&#128545";
+					break;
+				default:
+					break;
+			}
+		},
+		error: (error) => console.error(e)
+	})
 	
 	// &#128522 - lucky
 	// &#128528 - usual
 	// &#128545 - angry
+
+	
+
 }
 
 function addLine(id, labelsArray, datasetsArray, yTitle, xTitle, displayLegend, step = 5, maxV = 100) {
