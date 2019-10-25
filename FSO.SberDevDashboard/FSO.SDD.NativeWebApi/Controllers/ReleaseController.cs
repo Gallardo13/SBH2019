@@ -1,4 +1,5 @@
 ﻿using FSO.SDD.DataBaseEfStore;
+using FSO.SDD.NativeWebApi.Facades;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,31 +18,28 @@ namespace FSO.SDD.NativeWebApi.Controllers
     public class ReleaseController : HackController
     {
         public ReleaseController(StoreContext context) : base(context) { }
+        public ReleaseFacade facade = new ReleaseFacade();
 
         [Route("TechnicalDebt")]
         [HttpGet]
         public IEnumerable<TechnicalDebtInfo> GetTechnicalDebt()
         {
-            var r = new Random((int)DateTime.Now.Ticks);
-
-            return _context.JiraReleases.Select(e => new TechnicalDebtInfo { ReleaseID = e.Id, Percent = r.Next(30, 90) });
+            return facade.GetTechnicalDebt(_context);
         }
 
         [Route("TechnicalDebt/{id}")]
         [HttpGet]
-        public TechnicalDebtInfo GetTechnicalDebt(int id) => GetTechnicalDebt().FirstOrDefault(e=>e.ReleaseID == id);
+        public TechnicalDebtInfo GetTechnicalDebt(int id) => facade.GetTechnicalDebt(_context, id);
 
         [Route("TestCoverage")]
         [HttpGet]
         public IEnumerable<TechnicalDebtInfo> GetTestCoverage()
         {
-            var r = new Random((int)DateTime.Now.Ticks);
-
-            return _context.JiraReleases.Select(e => new TechnicalDebtInfo { ReleaseID = e.Id, Percent = r.Next(20, 25) });
+            return facade.GetTestCoverage(_context);
         }
 
         [Route("TestCoverage/{id}")]
         [HttpGet]
-        public TechnicalDebtInfo GetTestCoverage(int id) => GetTestCoverage().FirstOrDefault(e => e.ReleaseID == id);
+        public TechnicalDebtInfo GetTestCoverage(int id) => facade.GetTestCoverage(_context, id);
     }
 }

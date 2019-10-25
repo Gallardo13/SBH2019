@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FSO.SDD.NativeWebApi.Models.Grafana;
 using FSO.SDD.NativeWebApi.Facades;
+using FSO.SDD.DataBaseEfStore;
 
 namespace FSO.SDD.NativeWebApi.Controllers
 {
@@ -33,7 +34,21 @@ namespace FSO.SDD.NativeWebApi.Controllers
         [Route("search")]
         public IEnumerable<string> Search()
         {
-            return new string[] { "Burndown спринта", "Burndown эпика", "Burndown релиза", "Оптимальный Burndown" };
+            return new string[] {
+                "TechnicalDebt",
+                "TestCoverage",
+                "Задачи без PR / Proj",
+                "Задачи без PR / Team",
+                "Задачи без PR / Me",
+                "Задачи без PR / КЭ",
+                "Build (MR-1323)",
+                "Build (MR-1326)",
+                "Build (MR-1330)",
+                "Build (Release/10)",
+                "Burndown спринта",
+                "Burndown эпика",
+                "Burndown релиза",
+                "Оптимальный Burndown" };
         }
 
         /// <summary>
@@ -62,10 +77,13 @@ namespace FSO.SDD.NativeWebApi.Controllers
         #endregion
 
         #region Примеры генерации ответов
-        
-  
+
+        Random r;
+
         public IEnumerable<IQueryResponse> ProcessRequest(QueryRequest request)
         {
+            r = new Random();
+
             var result = new List<IQueryResponse>();
 
             foreach (var target in request.Targets)
@@ -76,22 +94,86 @@ namespace FSO.SDD.NativeWebApi.Controllers
                     var facade = new BurndownFacade();
                     var data = facade.GetData(BurnDownType.Spring, request.Range.From.DateTime, request.Range.To.DateTime);
                     result.Add(facade.ConvertBDItoTQR(data, target.Target));
+                    continue;
                 }
 
                 if (target.Target == "Оптимальный Burndown")
                 {
                     result.Add(GenerageOptimalBurndown(request, target.Target));
+                    continue;
+                }
+
+                if (target.Target == "TechnicalDebt")
+                {
+                    var value = new ReleaseFacade().GetTechnicalDebt(new StoreContext());
+
+                    var datapoints = new List<long[]>();
+                    datapoints.Add(new long[] { value.First().Percent, value.First().Percent });
+
+                    result.Add(new TimestampQueryResponse()
+                    {
+                        Target = target.Target,
+                        DataPoints = datapoints.ToArray()
+                    });
+                    continue;
+                }
+
+                if (target.Target == "TestCoverage")
+                {
+                    var value = new ReleaseFacade().GetTestCoverage(new StoreContext());
+
+                    var datapoints = new List<long[]>();
+                    datapoints.Add(new long[] { value.First().Percent, value.First().Percent });
+
+                    result.Add(new TimestampQueryResponse()
+                    {
+                        Target = target.Target,
+                        DataPoints = datapoints.ToArray()
+                    });
+                    continue;
                 }
                 
 
-                if (target.Type == "timeseries")
+                if (target.Target.ToLower().StartsWith("build", StringComparison.CurrentCulture))
                 {
-                    //result.Add(GenerageRandomTimeseries(request, target.Target));
+                    if (target.Target.ToLower().Contains("release"))
+                    {
+                        var datapoints = new List<long[]>();
+                        datapoints.Add(new long[] { 0, 0 });
+
+                        result.Add(new TimestampQueryResponse()
+                        {
+                            Target = target.Target,
+                            DataPoints = datapoints.ToArray()
+                        });
+                        continue;
+                    }
+                    else
+                    {
+                        var datapoints = new List<long[]>();
+                        datapoints.Add(new long[] { 1, 1 });
+
+                        result.Add(new TimestampQueryResponse()
+                        {
+                            Target = target.Target,
+                            DataPoints = datapoints.ToArray()
+                        });
+                        continue;
+                    }
                 }
-                else if (target.Type == "table")
+                else
                 {
-                    //result.Add(GenerageRandomTable(request, target.Target));
+                    var datapoints = new List<long[]>();
+                    datapoints.Add(new long[] { r.Next(0, 5), r.Next(0,1) });
+
+                    result.Add(new TimestampQueryResponse()
+                    {
+                        Target = target.Target,
+                        DataPoints = datapoints.ToArray()
+                    });
+                    continue;
                 }
+
             }
             return result;
         }

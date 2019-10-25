@@ -213,32 +213,89 @@ function addSonarMetrics() {
 				fill: false
 			}];
 
-			var labels = [];
+			var labels = [], sum = 0;
 			for (var i = 0; i < data.length; i++) {
 				labels.push('Релиз ' + data[i].releaseID);
 				datasetsDebt[0].data.push(data[i].percent);
+				sum += data[i].percent;
 			}
 
 			addLine('sonarTechnicalDebt', labels, datasetsDebt, '%', 'Релизы', false);
+
+			// TODO обосновать выбор значений
+			var currentTechnicalDebt = document.getElementById('currentTechnicalDebt');
+			currentTechnicalDebt.innerText = data[data.length - 1].percent + "%";
+			if (data[data.length - 1].percent <= 20) {
+				currentTechnicalDebt.classList.add('success');
+			} else if (data[data.length - 1].percent > 20 && data[data.length - 1].percent < 50) {
+				currentTechnicalDebt.classList.add('normal');
+			} else {
+				currentTechnicalDebt.classList.add('bad');
+			}
+
+			var averageTechnicalDebt = document.getElementById('averageTechnicalDebt');
+			
+			var average = Math.floor(sum / data.length);
+			averageTechnicalDebt.innerText = average + "%";
+			if (average <= 20) {
+				averageTechnicalDebt.classList.add('success');
+			} else if (average > 20 && average < 50) {
+				averageTechnicalDebt.classList.add('normal');
+			} else {
+				averageTechnicalDebt.classList.add('bad');
+			}
+
 		},
 		error: (error) => console.error(e)
 	})
 
-	
+	$.ajax({
+		url: "http://172.30.14.84/FSO.SDD.NativeWebApi/api/release/TestCoverage",
+		success: (data) => {
 
-	var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
-	
+			var datasetsTests = [{
+				label: 'Покрытие тестами',
+				data: [],
+				backgroundColor: "blue",
+				borderColor: "blue",
+				fill: false
+			}];
 
-	var datasetsTests = [{
-		label: 'Покрытие тестами',
-		data: [21, 25, 40, 45, 45, 51, 60, 71, 73, 73],
-		backgroundColor: "blue",
-		borderColor: "blue",
-		fill: false
-	}]
+			var labels = [], sum = 0;
+			for (var i = 0; i < data.length; i++) {
+				labels.push('Релиз ' + data[i].releaseID);
+				datasetsTests[0].data.push(data[i].percent);
+				sum += data[i].percent;
+			}
 
-	
-	addLine('sonarTestCoverage', labels, datasetsTests, '%', 'Months', false);
+			addLine('sonarTestCoverage', labels, datasetsTests, '%', 'Months', false);
+
+			var currentTestCoverage = document.getElementById('currentTestCoverage');
+			currentTestCoverage.innerText = data[data.length - 1].percent + "%";
+			if (data[data.length - 1].percent >= 80) {
+				currentTestCoverage.classList.add('success');
+			} else if (data[data.length - 1].percent >= 60 && data[data.length - 1].percent < 80) {
+				currentTestCoverage.classList.add('normal');
+			} else {
+				currentTestCoverage.classList.add('bad');
+			}
+
+			var averageTestCoverage = document.getElementById('averageTestCoverage');
+			
+			var average = Math.floor(sum / data.length);
+			averageTestCoverage.innerText = average + "%";
+			if (average >= 80) {
+				averageTestCoverage.classList.add('success');
+			} else if (average >= 60 && average < 80) {
+				averageTestCoverage.classList.add('normal');
+			} else {
+				averageTestCoverage.classList.add('bad');
+			}
+
+		},
+		error: (error) => console.error(e)
+	})
+
 }
 
 function addTaskStatuses() {
