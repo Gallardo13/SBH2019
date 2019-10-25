@@ -25,22 +25,22 @@ namespace FSO.SDD.NativeWebApi.Controllers
         [HttpGet]
         public IEnumerable<TechnicalDebtInfo> GetTechnicalDebt()
         {
-            return facade.GetTechnicalDebt(_context);
+            return facade.GetTechnicalDebt(_context, _cache);
         }
 
         [Route("TechnicalDebt/{id}")]
         [HttpGet]
-        public TechnicalDebtInfo GetTechnicalDebt(int id) => facade.GetTechnicalDebt(_context, id);
+        public TechnicalDebtInfo GetTechnicalDebt(int id) => facade.GetTechnicalDebt(_context, id, _cache);
 
         [Route("TestCoverage")]
         [HttpGet]
         public IEnumerable<TechnicalDebtInfo> GetTestCoverage()
         {
-            return facade.GetTestCoverage(_context);
+            return facade.GetTestCoverage(_context, _cache);
         }
 
         [Route("TestCoverage/{id}")]
         [HttpGet]
-        public TechnicalDebtInfo GetTestCoverage(int id) => facade.GetTestCoverage(_context, id);
+        public TechnicalDebtInfo GetTestCoverage(int id) => facade.GetTestCoverage(_context, id, _cache);
     }
 }

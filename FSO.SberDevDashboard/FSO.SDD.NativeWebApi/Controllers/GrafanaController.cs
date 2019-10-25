@@ -108,7 +108,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
 
                 if (target.Target == "TechnicalDebt")
                 {
-                    var value = new ReleaseFacade().GetTechnicalDebt(new StoreContext());
+                    var value = new ReleaseFacade().GetTechnicalDebt(_context, _cache);
 
                     var datapoints = new List<long[]>();
                     datapoints.Add(new long[] { value.First().Percent, value.First().Percent });
@@ -123,7 +123,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
 
                 if (target.Target == "TestCoverage")
                 {
-                    var value = new ReleaseFacade().GetTestCoverage(new StoreContext());
+                    var value = new ReleaseFacade().GetTestCoverage(_context, _cache);
 
                     var datapoints = new List<long[]>();
                     datapoints.Add(new long[] { value.First().Percent, value.First().Percent });

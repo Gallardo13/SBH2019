@@ -15,7 +15,7 @@ namespace FSO.SDD.NativeWebApi.Facades
 
         public BurnDownInfo GetData(BurnDownType type, DateTime startDate, DateTime endDate, IMemoryCache _cache)
         {
-            var cacheKey = $"BurnDownController_{type}";
+            var cacheKey = $"BurndownFacade_GetData_{type}_{startDate}_{endDate}";
             if (_cache.TryGetValue(cacheKey, out BurnDownInfo val))
                 return val;
 
