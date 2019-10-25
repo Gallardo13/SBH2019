@@ -3,7 +3,7 @@ $(function(){ //DOM Ready
 	//instantiate gridster 
 	$(".gridster > ul").gridster({
 		widget_margins: [8, 8],
-		widget_base_dimensions: [95, 50],
+		widget_base_dimensions: [98, 58],
 		extra_rows: 20,
 		extra_cols: 20,
 		min_rows: 30,
@@ -310,7 +310,7 @@ function addTaskStatuses() {
 					datasets: [{
 						label: 'Задачи',
 						data: [],
-						backgroundColor: "blue"
+						backgroundColor: "#c9daf8"
 					}]
 				},
 				options: {
