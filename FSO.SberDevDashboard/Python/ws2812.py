@@ -41,18 +41,23 @@ def alert(np):
 	for i in range(255):
 		np[0] = (i, 0, 0)
 		np.write()
-		time.sleep_ms(25)
+		time.sleep_ms(1)
 
-	for i in range(255):
-		np[0] = (255 - i, i, i)
-		np.write()
-		time.sleep_ms(25)
+	for i in range(6):
+		for i in range(255):
+			np[0] = (255, i, 0)
+			np.write()
+			time.sleep_ms(1)
 
-	for i in range(255):
-		np[0] = (i, 255 - i, 255 - i)
-		np.write()
-		time.sleep_ms(25)
+		for i in range(255):
+			np[0] = (255, 255 - i, 0)
+			np.write()
+			time.sleep_ms(1)
 
 	# clear
-	np[0] = (0, 0, 0)
+	#np[0] = (0, 0, 0)
+	#np.write()
+
+def ok(np):
+	np[0] = (0, 120, 0)
 	np.write()

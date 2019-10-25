@@ -97,6 +97,19 @@ namespace FSO.SDD.NativeWebApi.Controllers
             public int DefectsInStoryPoint { get; set; }
         }
 
+        [Route("ByType/{type}")]
+        [HttpGet]
+        public IEnumerable<ByTypeInfo> GetByType(ByType type)
+        {
+            var retVal = new List<ByTypeInfo>();
+
+            for (int i = 1; i < 16; i++)
+                retVal.Add(GetByType(type, i));
+
+            return retVal;
+        }
+
+
         [Route("ByType/{type}/{id}")]
         [HttpGet]
         public ByTypeInfo GetByType(ByType type, int id)
@@ -121,15 +134,53 @@ namespace FSO.SDD.NativeWebApi.Controllers
             var retVal =
                 t.Where(e => t2.Contains(e.Id)).Select(e => new { IsDefect = e.DefectSeverity > 0 ? true : false, e.OriginalEstimation })
                 .GroupBy(e => e.IsDefect)
-                .Select(e => new { IsDefect = e.Key, DefectInCount = e.Count(), DefectsInStoryPoint = e.Sum(t=>t.OriginalEstimation) });
+                .Select(e => new { IsDefect = e.Key, DefectInCount = e.Count(), DefectsInStoryPoint = e.Sum(t => t.OriginalEstimation) });
 
             var total = retVal.Sum(e => e.DefectInCount);
 
-            return new ByTypeInfo
+            try
             {
-                DefectInPercent = (int)(retVal.Single(e => e.IsDefect).DefectInCount / (double)total * 100),
-                DefectsInStoryPoint = retVal.Single(e => e.IsDefect).DefectsInStoryPoint
-            };
+                return new ByTypeInfo
+                {
+                    DefectInPercent = (int)(retVal.Single(e => e.IsDefect).DefectInCount / (double)total * 100),
+                    DefectsInStoryPoint = retVal.Single(e => e.IsDefect).DefectsInStoryPoint
+                };
+            }
+            catch
+            {
+                return new ByTypeInfo();
+            }
+        }
+
+        public class CriticalBugResolveInfo
+        {
+            public int SprintId { get; set; }
+            public int Days { get; set; }
+        }
+
+        [Route("CriticalBugResolve")]
+        [HttpGet]
+        public IEnumerable<CriticalBugResolveInfo> CriticalBugResolve()
+        {
+            var retVal = new List<CriticalBugResolveInfo>();
+
+            for (int i = 1; i < 16; i++)
+                retVal.Add(CriticalBugResolve(i));
+
+            return retVal;
+        }
+
+
+        [Route("CriticalBugResolve/{sprintId}")]
+        [HttpGet]
+        public CriticalBugResolveInfo CriticalBugResolve(int sprintId)
+        {
+            var t = _context.JiraTasks.Where(e => e.DefectSeverity > 0).ToList();
+            var t2 = _context.JiraSprintTasks.Where(e => e.SprintId == sprintId).Select(e => e.TaskId).ToList();
+
+            var r = new Random((int)DateTime.Now.Ticks);
+
+            return new CriticalBugResolveInfo { SprintId = sprintId, Days = r.Next(3, 15) };
         }
     }
 }

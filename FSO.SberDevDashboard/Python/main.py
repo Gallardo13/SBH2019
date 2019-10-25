@@ -37,10 +37,13 @@ if pin.value() > 0:
         print(r["status"])
 
         if r["status"] != "Ok":
-            ws2812.demo2(np)
+            ws2812.alert(np)
+
+        else:
+	    ws2812.ok(np)
 
         #http_get(url)
-        time.sleep(10)
+        time.sleep(3)
 
 else:
     print('skip main...')
