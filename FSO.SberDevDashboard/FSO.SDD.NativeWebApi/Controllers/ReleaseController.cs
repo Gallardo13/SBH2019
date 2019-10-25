@@ -1,6 +1,7 @@
 ﻿using FSO.SDD.DataBaseEfStore;
 using FSO.SDD.NativeWebApi.Facades;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
     [ApiController]
     public class ReleaseController : HackController
     {
-        public ReleaseController(StoreContext context) : base(context) { }
+        public ReleaseController(StoreContext context, IMemoryCache cache) : base(context, cache) { }
         public ReleaseFacade facade = new ReleaseFacade();
 
         [Route("TechnicalDebt")]

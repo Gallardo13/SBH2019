@@ -28,6 +28,7 @@ namespace FSO.SDD.NativeWebApi
             var dbPath = @"..\..\..\..\FSO.SDD.DataBase.db";
 
             services.AddDbContext<StoreContext>();
+            services.AddMemoryCache();
             services.AddControllers();
         }
 

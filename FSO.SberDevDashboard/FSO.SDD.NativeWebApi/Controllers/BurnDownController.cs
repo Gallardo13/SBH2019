@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using FSO.SDD.NativeWebApi.Facades;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace FSO.SDD.NativeWebApi.Controllers
 {
@@ -23,15 +24,22 @@ namespace FSO.SDD.NativeWebApi.Controllers
     [ApiController]
     public class BurnDownController : HackController
     {
-        public BurnDownController(StoreContext context) : base(context) { }
+        public BurnDownController(StoreContext context, IMemoryCache cache) : base(context, cache) { }
 
         // GET: api/BurnDown
         [HttpGet("{type}")]
         public BurnDownInfo Get(BurnDownType type)
         {
+            var cacheKey = $"BurnDownController_{type}";
+            if (_cache.TryGetValue(cacheKey, out BurnDownInfo val))
+                return val;
+
             var startDate = DateTime.Now.AddDays(-5 * (int)type);
             var endDate = DateTime.Now.AddDays(5 * (int)type);
-            return new BurndownFacade().GetData(type, startDate, endDate);
+
+            val = new BurndownFacade().GetData(type, startDate, endDate);
+            _cache.Set(cacheKey, val, new TimeSpan(0, 1, 0));
+            return val;
         }
     }
 }

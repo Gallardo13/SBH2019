@@ -2,6 +2,7 @@
 using FSO.SDD.DbModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
     [ApiController]
     public class JiraTasksController : HackController
     {
-        public JiraTasksController(StoreContext context) : base(context) { }
+        public JiraTasksController(StoreContext context, IMemoryCache cache) : base(context, cache) { }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<JiraTask>>> Get() =>

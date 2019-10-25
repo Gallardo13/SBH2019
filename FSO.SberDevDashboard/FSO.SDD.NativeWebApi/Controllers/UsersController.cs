@@ -2,6 +2,7 @@
 using FSO.SDD.DbModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
     [ApiController]
     public class UsersController : HackController
     {
-        public UsersController(StoreContext context) : base(context) { }
+        public UsersController(StoreContext context, IMemoryCache cache) : base(context, cache) { }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers() =>
