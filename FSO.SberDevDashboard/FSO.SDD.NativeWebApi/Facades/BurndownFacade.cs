@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FSO.SDD.NativeWebApi.Controllers;
 using FSO.SDD.NativeWebApi.Models.Grafana;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace FSO.SDD.NativeWebApi.Facades
 {
@@ -12,8 +13,12 @@ namespace FSO.SDD.NativeWebApi.Facades
             
         }
 
-        public BurnDownInfo GetData(BurnDownType type, DateTime startDate, DateTime endDate)
+        public BurnDownInfo GetData(BurnDownType type, DateTime startDate, DateTime endDate, IMemoryCache _cache)
         {
+            var cacheKey = $"BurnDownController_{type}";
+            if (_cache.TryGetValue(cacheKey, out BurnDownInfo val))
+                return val;
+
             var r = new Random((int)DateTime.Now.Ticks);
 
             var retVal = new BurnDownInfo
@@ -34,6 +39,7 @@ namespace FSO.SDD.NativeWebApi.Facades
 
             retVal.Days = days;
 
+            _cache.Set(cacheKey, retVal, new TimeSpan(0, 1, 0));
             return retVal;
         }
 

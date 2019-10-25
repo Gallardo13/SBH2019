@@ -7,13 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using FSO.SDD.NativeWebApi.Models.Grafana;
 using FSO.SDD.NativeWebApi.Facades;
 using FSO.SDD.DataBaseEfStore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace FSO.SDD.NativeWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GrafanaController : ControllerBase
+    public class GrafanaController : HackController
     {
+
+        public GrafanaController(StoreContext context, IMemoryCache cache) : base(context, cache) { }
 
         #region Grafana Api
 
@@ -92,7 +95,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
                 if (target.Target == "Burndown спринта" || target.Target == "Burndown эпика" || target.Target == "Burndown релиза")
                 {
                     var facade = new BurndownFacade();
-                    var data = facade.GetData(BurnDownType.Spring, request.Range.From.DateTime, request.Range.To.DateTime);
+                    var data = facade.GetData(BurnDownType.Spring, request.Range.From.DateTime, request.Range.To.DateTime, _cache);
                     result.Add(facade.ConvertBDItoTQR(data, target.Target));
                     continue;
                 }

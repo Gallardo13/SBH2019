@@ -30,16 +30,10 @@ namespace FSO.SDD.NativeWebApi.Controllers
         [HttpGet("{type}")]
         public BurnDownInfo Get(BurnDownType type)
         {
-            var cacheKey = $"BurnDownController_{type}";
-            if (_cache.TryGetValue(cacheKey, out BurnDownInfo val))
-                return val;
-
             var startDate = DateTime.Now.AddDays(-5 * (int)type);
             var endDate = DateTime.Now.AddDays(5 * (int)type);
 
-            val = new BurndownFacade().GetData(type, startDate, endDate);
-            _cache.Set(cacheKey, val, new TimeSpan(0, 1, 0));
-            return val;
+            return new BurndownFacade().GetData(type, startDate, endDate, _cache);
         }
     }
 }
