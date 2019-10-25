@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FSO.SDD.NativeWebApi.Models.Grafana;
+using FSO.SDD.NativeWebApi.Facades;
 
 namespace FSO.SDD.NativeWebApi.Controllers
 {
@@ -32,7 +33,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
         [Route("search")]
         public IEnumerable<string> Search()
         {
-            return new string[] { "upper_25", "upper_50", "upper_75", "upper_90", "upper_95" };
+            return new string[] { "Burndown спринта", "Burndown эпика", "Burndown релиза", "Оптимальный Burndown" };
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace FSO.SDD.NativeWebApi.Controllers
         [Route("Query")]
         public string Query(QueryRequest request)
         {
-            var result = GenerateRandomQueryAnswer(request);
+            var result = ProcessRequest(request);
             return Newtonsoft.Json.JsonConvert.SerializeObject(result);
         }
 
@@ -63,40 +64,57 @@ namespace FSO.SDD.NativeWebApi.Controllers
         #region Примеры генерации ответов
         
   
-        public IEnumerable<IQueryResponse> GenerateRandomQueryAnswer(QueryRequest request)
+        public IEnumerable<IQueryResponse> ProcessRequest(QueryRequest request)
         {
             var result = new List<IQueryResponse>();
 
             foreach (var target in request.Targets)
             {
+
+                if (target.Target == "Burndown спринта" || target.Target == "Burndown эпика" || target.Target == "Burndown релиза")
+                {
+                    var facade = new BurndownFacade();
+                    var data = facade.GetData(BurnDownType.Spring, request.Range.From.DateTime, request.Range.To.DateTime);
+                    result.Add(facade.ConvertBDItoTQR(data, target.Target));
+                }
+
+                if (target.Target == "Оптимальный Burndown")
+                {
+                    result.Add(GenerageOptimalBurndown(request, target.Target));
+                }
+                
+
                 if (target.Type == "timeseries")
                 {
-                    result.Add(GenerageRandomTimeseries(request, target.Target));
+                    //result.Add(GenerageRandomTimeseries(request, target.Target));
                 }
                 else if (target.Type == "table")
                 {
-                    result.Add(GenerageRandomTable(request, target.Target));
+                    //result.Add(GenerageRandomTable(request, target.Target));
                 }
             }
             return result;
         }
 
         
-        public TimestampQueryResponse GenerageRandomTimeseries(QueryRequest request, string target)
+        public TimestampQueryResponse GenerageOptimalBurndown(QueryRequest request, string target)
         {
-            
-            var random = new Random();
+
+            var total = 100;
+            var step = total / (request.Range.To - request.Range.From).Days;
+
 
             var timestamp = new TimestampQueryResponse()
             {
                 Target = target
             };
 
-            var list = new List<float[]>();
-            for (var dt = request.Range.From; dt <= request.Range.To; dt = dt.AddMinutes(5))
+            var list = new List<long[]>();
+            for (var dt = request.Range.From; dt <= request.Range.To; dt = dt.AddDays(1))
             {
                 var unixtime = dt.ToUnixTimeMilliseconds();
-                list.Add(new float[] { Convert.ToSingle(random.NextDouble() * 1000), unixtime });
+                list.Add(new long[] { total, unixtime });
+                total -= step;
             }
 
             timestamp.DataPoints = list.ToArray();

@@ -23,6 +23,7 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Models\Grafana\" />
+    <Folder Include="Facades\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\GrafanaQueryRequest.cs" />

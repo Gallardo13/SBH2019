@@ -9,6 +9,6 @@ namespace FSO.SDD.NativeWebApi.Models.Grafana
         public string Target { get; set; }
 
         [JsonProperty("datapoints")]
-        public float[][] DataPoints { get; set; }
+        public long[][] DataPoints { get; set; }
     }
 }
